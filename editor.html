@@ -143,15 +143,18 @@
                     <option value="PWM">PWM</option>
                 </select> 
                 <br>
-                <button id="add">Add Pin</button>
-                <button id="delete">Delete Pin</button>
+                <input type="text" name="min" id="min" size="10" placeholder="Range (min)">
+                <input type="text" name="max" id="max" size="10" placeholder="Range (max)">
+                <br>
+                <button id="add">Add</button>
+                <button id="delete">Delete</button>
             </div>
-            <h3 id="config-title" >Configuration</h3>
+            <h4 id="config-title" >Configuration</h4>
             <div id="config">
                 <button id="load">Load</button>
                 <button id="save">Save</button>
             </div>
-            <h3  id="json-title">JSON</h3>
+            <h4  id="json-title">JSON</h4>
             <div id="info">
                 <div>Auto-update JSON: <input type="checkbox" id="updatejson" name="updatejson" value="update"></div>
                 <div id="json"></div>
