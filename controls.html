@@ -7,19 +7,23 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>KBot - Editor</title>
+    <title>KBot - Controls</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <style>
+        #controls {margin-bottom: 15px;}
+        #controlpad {background-color: #EEE; border: 1px solid #000; background-image: url("media/controlpad.jpg");}
+    </style>
     <link rel="stylesheet" type="text/css" href="css/kbot.css">
   </head>
 
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href=".">KBot Interface</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./">KBot Interface</a>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -34,9 +38,9 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link" href="controls.html">
+                <a class="nav-link active" href="#">
                   <span data-feather="home"></span>
-                  Controls
+                  Controls <span class="sr-only">(current)</span>
                 </a>
               </li>
               <!--
@@ -80,9 +84,9 @@
             </h6>
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link active" href="editor.html">
+                <a class="nav-link" href="editor.html">
                   <span data-feather="file-text"></span>
-                  Pin Editor <span class="sr-only">(current)</span>
+                  Pin Editor
                 </a>
               </li>
               <!--
@@ -111,7 +115,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Pin Editor</h2>
+            <h1 class="h2">Controls</h2>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary">Share</button>
@@ -128,34 +132,46 @@
           <!--
           <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
           -->
-            <div id="camera">
-                <img id="video" src="http://th3ri5k.mynetgear.com/video/cam_pic.php">
-                <div id="maximize">
-                    <span style="width: 25px; height: auto; background-color: black; color: white; border: 1px solid white; position: absolute; right: 5px" data-feather="maximize-2"></span>
+        <div id="camera">
+            <img id="video" src="http://th3ri5k.mynetgear.com/video/cam_pic.php">
+            <div id="maximize">
+                <span style="width: 25px; height: auto; background-color: black; color: white; border: 1px solid white; position: absolute; right: 5px" data-feather="maximize-2"></span>
+            </div>
+        </div>
+        <div id="controls">
+            <div id="pinedit">
+                <h4>Pin Select/GPIO/Servo</h4>
+                <input type="text" name="select" id="select" placeholder="Pin Name"><button id="switch">On/Off</button><br>
+                <input type="text" name="angle" id="angle" placeholder="Servo degrees (0-180)"><button id="rotate">Rotate</button>
+            </div>
+            <div id="gpio">
+                <h4>GPIO Switches</h4>
+                <div>Update switches: <input type="checkbox" id="updateswitches" value="update" checked></div>
+                <div id="switches"></div>
+            </div>
+            <div id="cameracontrols">
+                <h4>Camera</h4>
+                <div>Control Pad Enabled: <input type="checkbox" id="updatelogs" value="padon"></div>
+                <div id="controlpad" style="height: 200px; width: 200px"></div>
+                <div id="padcoords"></div>
+                <h4>Digital</h4>
+                <button class="dircontrol" id="up" style="margin-left: 32px;">&#8593;</button>
+                <div>
+                    <button class="dircontrol" id="left">&#8592;</button>
+                    <button class="dircontrol" id="down">&#8595;</button>
+                    <button class="dircontrol" id="right">&#8594;</button>
+                    <h5>Pan Speed/Tilt Speed</h5>
+                    <input type="number" name="panspeed" value="10" id="panspeed" placeholder="Pan Speed"><br>
+                    <input type="number" name="tiltspeed" value="10" id="tiltspeed" placeholder="Tilt Speed">
                 </div>
+                <div>Rave Mode Enabled: <input type="checkbox" id="animon" name="animon" value="animon"></div>
             </div>
-            <div id="editor">
-                <input type="text" name="name" size="32" id="name" placeholder="Pin Name"> <br>
-                <input type="text" name="pin" id="pin" placeholder="Pin ID (ex. P8_1)">
-                <select name="type" id="type">
-                    <option value="GPIO">GPIO</option>
-                    <option value="SERVO">SERVO</option>
-                    <option value="PWM">PWM</option>
-                </select> 
-                <br>
-                <button id="add">Add Pin</button>
-                <button id="delete">Delete Pin</button>
-            </div>
-            <h3 id="config-title" >Configuration</h3>
-            <div id="config">
-                <button id="load">Load</button>
-                <button id="save">Save</button>
-            </div>
-            <h3  id="json-title">JSON</h3>
-            <div id="info">
-                <div>Auto-update JSON: <input type="checkbox" id="updatejson" name="updatejson" value="update"></div>
-                <div id="json"></div>
-            </div> 
+        </div>  
+        <h3 id="config-title" class="section-title">Configuration</h3>
+        <div id="config">
+            <button id="load">Load</button>
+        </div>
+          
           
           <!--
           <div class="table-responsive">
@@ -285,6 +301,12 @@
               </tbody>
             </table>
             -->
+            <h3 class="section-title" id="json-title">JSON</h3>
+            <div id="info">
+                <div>Update JSON: <input type="checkbox" id="updatejson" name="updatejson" value="update" checked></div>
+                <div id="json"> </div>
+            </div> 
+          </div>
         </main>
       </div>
     </div>
@@ -305,13 +327,45 @@
     <!-- KBot core js -->
     <script type="text/javascript" src="js/kbot-ui.js"></script>
     <script type="text/javascript" src="js/kbot-func.js"></script>
+    
     <script type="text/javascript">
-        var url = "http://th3ri5k.mynetgear.com:8000/";
+        var cam_pan = 90;
+        var cam_tilt = 90;
+        var json;
         
-        /*$(document).ready(function(){
+        $(document).ready(function(){
+            $("#controlpad").click(function(e){
+                if(!$("#padon").prop("checked")) return;
+                var parentOffset = $(this).parent().offset();
+                var cenx = ($(this).width()/2);
+                var ceny = ($(this).height()/2);
+                var relX = parseInt((((e.pageX - parentOffset.left - cenx)/cenx)*90)+90);
+                var relY = parseInt(((-1*(e.pageY - parentOffset.top - (ceny+62))/ceny)*90)+90);
+                $("#padcoords").html("Pan: "+relX +"°"+ " Tilt: "+relY+"°");
+                query("rotate", "name=TILT&angle="+relY);
+                query("rotate", "name=PAN&angle="+relX);
+            });
 
-        });
-        */
+            $("#up").click(function(){
+                cam_tilt += parseInt($("#tiltspeed").val());
+                query("rotate", "name=TILT&angle="+cam_tilt);
+            });
+
+            $("#down").click(function(){
+                cam_tilt -= parseInt($("#tiltspeed").val());
+                query("rotate", "name=TILT&angle="+cam_tilt);
+            });
+
+            $("#right").click(function(){
+                cam_pan += parseInt($("#panspeed").val());
+                query("rotate", "name=PAN&angle="+cam_pan);
+            });
+
+            $("#left").click(function(){
+                cam_pan -= parseInt($("#panspeed").val());
+                query("rotate", "name=PAN&angle="+cam_pan);
+            });
+      });
     </script>
     
     <!-- Icons -->

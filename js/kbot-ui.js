@@ -1,44 +1,35 @@
 $(document).ready(function(){
     setInterval(function(){
-        if(!$("#updatejson").prop("checked")) return;
-        query("json");
-        displayJSON();
-        if(!$("#updateswitches").prop("checked")) return;
-        updateswitches("switches");
-        
-        //query("log");
+        if($("#updatejson").prop("checked")) {
+            query("json");
+            displayJSON();}
+        if($("#updateswitches").prop("checked")) {
+            updateswitches("switches");}
+        if($("#updatelogs").prop("checked")) {
+            log("tail=False&maxlines=50");}
     }, 1000); 
     
-    setInterval(function(video){  
-        var video = "http://admin:158!%*@moonman1.mynetgear.com/html/cam_pic.php"    
+    setInterval(function(){  
+        var video = "http://th3ri5k.mynetgear.com/video/cam_pic.php";
         $("#video").attr("src", video+"?time="+new Date().getTime());
+
     }, 1000); 
     
-    $("#camera").draggable();
-    
-    displayJSON();
-    updateswitches("switches");
-    
-    $('#editor-title').click(function(){
-       $('#editor').slideToggle('slow');
+    $("#camera").draggable();     
+    $("#maximize").click(function (){
+        if ($("#camera").css("width") == "512px") {
+            $("#camera").attr("style", "width: 400px; height: 300px;");
+        } else {
+        $("#camera").attr("style", "width: 512px; height: 384px;");}
     });
-  
-    $('#config-title').click(function(){
-       $('#config').slideToggle('slow');
-    });
-    
-    $('#json-title').click(function(){
-       $('#info').slideToggle('slow');
-    });
-    
-    $('#controls-title').click(function(){
-        $('#controls').slideToggle('slow');
-    });
-            
 });
 
 function displayJSON() {
     $("#json").html(JSON.stringify(json));
+}
+
+function displayLog() {
+    //$("#logs").html(json);
 }
 
 function updateswitches(id) {

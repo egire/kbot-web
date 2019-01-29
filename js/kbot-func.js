@@ -33,7 +33,7 @@ $(document).ready(function(){
 });
 
 function query(type, data="") {
-    var url = "http://moonman1.mynetgear.com:8000/bbb/";
+    var url = "http://th3ri5k.mynetgear.com:8000/";
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -41,5 +41,17 @@ function query(type, data="") {
         }
     };
     xhttp.open("GET", url+type+"?"+data, true);
+    xhttp.send();
+}
+
+function log(data="") {
+    var url = "http://th3ri5k.mynetgear.com:8000/";
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            $("#logs").html(this.responseText);
+        }
+    };
+    xhttp.open("GET", url+"log?"+data, true);
     xhttp.send();
 }

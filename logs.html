@@ -19,7 +19,7 @@
 
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href=".">KBot Interface</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./">KBot Interface</a>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -80,9 +80,9 @@
             </h6>
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link active" href="editor.html">
+                <a class="nav-link" href="editor.html">
                   <span data-feather="file-text"></span>
-                  Pin Editor <span class="sr-only">(current)</span>
+                  Pin Editor
                 </a>
               </li>
               <!--
@@ -100,9 +100,9 @@
               </li>
               -->
               <li class="nav-item">
-                <a class="nav-link" href="logs.html">
+                <a class="nav-link active" href="#">
                   <span data-feather="file-text"></span>
-                  Logs
+                  Logs <span class="sr-only">(current)</span>
                 </a>
               </li>
             </ul>
@@ -111,7 +111,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Pin Editor</h2>
+            <h1 class="h2">Logs</h2>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary">Share</button>
@@ -134,28 +134,10 @@
                     <span style="width: 25px; height: auto; background-color: black; color: white; border: 1px solid white; position: absolute; right: 5px" data-feather="maximize-2"></span>
                 </div>
             </div>
-            <div id="editor">
-                <input type="text" name="name" size="32" id="name" placeholder="Pin Name"> <br>
-                <input type="text" name="pin" id="pin" placeholder="Pin ID (ex. P8_1)">
-                <select name="type" id="type">
-                    <option value="GPIO">GPIO</option>
-                    <option value="SERVO">SERVO</option>
-                    <option value="PWM">PWM</option>
-                </select> 
-                <br>
-                <button id="add">Add Pin</button>
-                <button id="delete">Delete Pin</button>
+            <div>Update Logs: <input type="checkbox" id="updatelogs" value="logson" checked></div>
+            <div id="logs">
+                
             </div>
-            <h3 id="config-title" >Configuration</h3>
-            <div id="config">
-                <button id="load">Load</button>
-                <button id="save">Save</button>
-            </div>
-            <h3  id="json-title">JSON</h3>
-            <div id="info">
-                <div>Auto-update JSON: <input type="checkbox" id="updatejson" name="updatejson" value="update"></div>
-                <div id="json"></div>
-            </div> 
           
           <!--
           <div class="table-responsive">
@@ -307,7 +289,7 @@
     <script type="text/javascript" src="js/kbot-func.js"></script>
     <script type="text/javascript">
         var url = "http://th3ri5k.mynetgear.com:8000/";
-        
+        var json;
         /*$(document).ready(function(){
 
         });
