@@ -18,10 +18,54 @@ $(document).ready(function(){
     $("#camera").draggable();     
     $("#maximize").click(function (){
         if ($("#camera").css("width") == "512px") {
-            $("#camera").attr("style", "width: 400px; height: 300px;");
+            $("#camera").attr("style", "width: 400px; height: 225px;");
         } else {
-        $("#camera").attr("style", "width: 512px; height: 384px;");}
+        $("#camera").attr("style", "width: 512px; height: 288px;");}
     });
+});
+
+$(document).keyup(function(key) {
+    if($("#enableWASD").prop("checked")) {
+        switch(key.which) {
+            case 65: // left
+                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
+                break;
+            case 87: // up
+                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
+                break;
+            case 68: // right
+                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
+                break;
+            case 83: // down
+                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
+                break;
+        }
+        key.preventDefault(); // prevent default action (scroll / move caret)
+    }
+});
+$(document).keydown(function(key) {
+    if($("#enableWASD").prop("checked")) {
+        switch(key.which) {
+            case 65: // left
+                speed = parseFloat($("#movespeed").val());
+                command("move", "leftFore="+speed+"&leftAft="+(speed)+"&rightFore="+speed+"&rightAft="+speed);
+                break;
+            case 87: // up
+                speed = parseFloat($("#movespeed").val());
+                command("move", "leftFore=-"+speed+"&leftAft=-"+(speed)+"&rightFore="+speed+"&rightAft="+speed);
+                break;
+            case 68: // right
+                speed = parseFloat($("#movespeed").val());
+                command("move", "leftFore=-"+speed+"&leftAft=-"+(speed)+"&rightFore=-"+speed+"&rightAft=-"+speed);
+                break;
+            case 83: // down
+                speed = parseFloat($("#movespeed").val());
+                command("move", "leftFore="+speed+"&leftAft="+(speed)+"&rightFore=-"+speed+"&rightAft=-"+speed);
+                break;
+            default: return; 
+        }
+        key.preventDefault();
+    }
 });
 
 function displayJSON() {

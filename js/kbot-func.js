@@ -54,10 +54,29 @@ function command(type, data="") {
             result = this.responseText;
         }
     };
-    
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    
     xhttp.open("POST", url+type, true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(data);
+}
+
+
+function login(data="") {
+    var url = "http://th3ri5k.mynetgear.com:8000/";
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            if(this.responseText) {
+                json = JSON.parse(this.responseText);
+                document.cookie = "username="+json[0]["username"];
+                document.cookie = "token="+json[0]["token"];
+                $("#status").html("Hello, "+json[0]["username"]+"!");
+                window.location = "./controls.html";
+            } else {$("#status").html("Authetication failed.");}
+        }
+    };
+    xhttp.open("POST", url+"login", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.send(data);
 }
 
