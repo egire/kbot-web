@@ -10,7 +10,7 @@ $(document).ready(function(){
     }, 1000); 
     
     setInterval(function(){  
-        var video = "http://th3ri5k.mynetgear.com/video/cam_pic.php";
+        var video = "http://moonman1.mynetgear.com/video/cam_pic.php";
         $("#video").attr("src", video+"?time="+new Date().getTime());
 
     }, 1000); 
