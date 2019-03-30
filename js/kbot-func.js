@@ -35,7 +35,7 @@ $(document).ready(function(){
 });
 
 function query(type, data="") {
-    var url = "http://th3ri5k.mynetgear.com:8000/";
+    var url = "http://moonman1.mynetgear.com:8000/";
     var xhttp = new XMLHttpRequest();
     var token = getCookie("token");
     var username = getCookie("username");
@@ -55,7 +55,7 @@ function getCookie(name) {
 }
 
 function command(type, data="") {
-    var url = "http://th3ri5k.mynetgear.com:8000/";
+    var url = "http://moonman1.mynetgear.com:8000/";
     var xhttp = new XMLHttpRequest();
     var token = getCookie("token");
     var username = getCookie("username");
@@ -91,7 +91,7 @@ function login(data="") {
 }
 
 function log(data="") {
-    var url = "http://th3ri5k.mynetgear.com:8000/";
+    var url = "http://moonman1.mynetgear.com:8000/";
     var xhttp = new XMLHttpRequest();
     var token = getCookie("token");
     console.log(token);
