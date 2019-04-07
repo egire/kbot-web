@@ -7,17 +7,13 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>KBot - Controls</title>
+    <title>KBot - Editor</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-    <style>
-        #controls {margin-bottom: 15px;}
-        #controlpadrotate {background-color: #EEE; border: 1px solid #000; background-image: url("media/controlpad.jpg");}
-    </style>
     <link rel="stylesheet" type="text/css" href="css/kbot.css">
   </head>
 
@@ -38,44 +34,19 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a class="nav-link" href="controls.html">
                   <span data-feather="home"></span>
-                  Controls <span class="sr-only">(current)</span>
+                  Controls
                 </a>
               </li>
-              <!--
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file"></span>
-                  Orders
+			   <li class="nav-item">
+                <a class="nav-link" href="Sensors.html">
+                  <span data-feather="home"></span>
+                  Sensors
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="shopping-cart"></span>
-                  Products
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  Customers
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="bar-chart-2"></span>
-                  Reports
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  Integrations
-                </a>
-              </li>
-            </ul>
-            -->
+             
+            
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Admin</span>
               <a class="d-flex align-items-center text-muted" href="#">
@@ -89,24 +60,11 @@
                   Pin Editor
                 </a>
               </li>
-              <!--
+             
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link active" href="#">
                   <span data-feather="file-text"></span>
-                  Last quarter
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Social engagement
-                </a>
-              </li>
-              -->
-              <li class="nav-item">
-                <a class="nav-link" href="logs.html">
-                  <span data-feather="file-text"></span>
-                  Logs
+                  Logs <span class="sr-only">(current)</span>
                 </a>
               </li>
             </ul>
@@ -115,12 +73,13 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Controls</h2>
+            <h1 class="h2">Sensors</h2>
             <div class="btn-toolbar mb-2 mb-md-0">
-              <!--<div class="btn-group mr-2">
+              <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary">Share</button>
                 <button class="btn btn-sm btn-outline-secondary">Export</button>
               </div>
+              <!--
               <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
                 <span data-feather="calendar"></span>
                 This week
@@ -131,63 +90,18 @@
           <!--
           <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
           -->
-        <div id="camera">
-            <img id="video" src="http://th3ri5k.mynetgear.com/video/cam_pic.php">
-            <div id="maximize">
-                <span style="width: 25px; height: auto; background-color: black; color: white; border: 1px solid white; position: absolute; right: 5px" data-feather="maximize-2"></span>
-            </div>
-        </div>
-        <div id="controls">
-            <div id="pinedit">
-                <h5>Pin Select/GPIO/Servo</h5>
-                <input type="text" name="select" id="select" placeholder="Pin Name"><button id="switch">On/Off</button><br>
-                <input type="text" name="angle" id="angle" placeholder="Servo degrees (0-180)"><button id="rotate">Rotate</button>
-            </div>
-            <div id="gpio">
-                <h5>GPIO Switches</h5>
-                <div>Update switches: <input type="checkbox" id="updateswitches" value="update" checked></div>
-                <div id="switches"></div>
-            </div>
-            <div id="cameracontrols">
-                <h4>Camera</h4>
-                <div>Control Pad Enabled: <input type="checkbox" id="updatelogs" value="padon"></div>
-                <div id="controlpadrotate" style="height: 200px; width: 200px"></div>
-                <div id="padcoordsrotate"></div>
-                <h5>Digital</h5>
-                <button class="dircontrol" id="up-rotate" style="margin-left: 32px;">&#8593;</button>
-                <div>
-                    <button class="dircontrol" id="left-rotate">&#8592;</button>
-                    <button class="dircontrol" id="down-rotate">&#8595;</button>
-                    <button class="dircontrol" id="right-rotate">&#8594;</button>
-                    <h5>Pan Speed/Tilt Speed</h5>
-                    <input type="number" name="panspeed" value="10" id="panspeed" placeholder="Pan Speed"><br>
-                    <input type="number" name="tiltspeed" value="10" id="tiltspeed" placeholder="Tilt Speed">
+            <div id="camera">
+                <img id="video" src="http://th3ri5k.mynetgear.com/video/cam_pic.php">
+                <div id="maximize">
+                    <span style="width: 25px; height: auto; background-color: black; color: white; border: 1px solid white; position: absolute; right: 5px" data-feather="maximize-2"></span>
                 </div>
-                <div>Rave Mode Enabled: <input type="checkbox" id="animon" name="animon" value="animon"></div>
             </div>
-            <div id="trackcontrols">
-                <h4>Tracks</h4>
-                <h5>Digital</h5>
-                <div>Enabled WASD: <input type="checkbox" id="enableWASD" value="wasdon"></div>
-                <button class="dircontrol" id="up-move" style="margin-left: 32px;">&#8593;</button>
-                <div>
-                    <button class="dircontrol" id="left-move">&#8592;</button>
-                    <button class="dircontrol" id="down-move">&#8595;</button>
-                    <button class="dircontrol" id="right-move">&#8594;</button>
-                    <h5>Move speed</h5>
-                    <input type="number" value="1.0" step="0.1" max="1.0" min="0.0" id="movespeed" placeholder="Pan Speed">
-                </div>
-                <button type="number" value="0" id="stop">Stop</button>
-            </div>
-        </div>  
-        <h4 id="config-title">Configuration</h4>
-        <div id="config">
-            <button id="load">Load</button>
-        </div>
-          <div> 
+            <div>Update Sensors: <input type="checkbox" id="updatesensors" value="sensorson" checked></div>
+            
+		<div> 
           <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="659" height="278" style="display: block; width: 659px; height: 278px;">
 
-          </div>
+        </div>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
@@ -314,20 +228,10 @@
                 </tr>
               </tbody>
             </table>
-            
-			
-			
-			
-			
-            <h4 id="json-title">JSON</h4>
-            <div id="info">
-                <div>Update JSON: <input type="checkbox" id="updatejson" name="updatejson" value="update"></div>
-                <div id="json"> </div>
-            </div> 
-          </div>
-        </main>
+             </main>
       </div>
     </div>
+	
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -337,7 +241,7 @@
         crossorigin="anonymous"></script>    
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
           integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
           crossorigin="anonymous"></script>
@@ -345,69 +249,13 @@
     <!-- KBot core js -->
     <script type="text/javascript" src="js/kbot-ui.js"></script>
     <script type="text/javascript" src="js/kbot-func.js"></script>
-    
     <script type="text/javascript">
-        var cam_pan = 90;
-        var cam_tilt = 90;
+        var url = "http://th3ri5k.mynetgear.com:8000/";
         var json;
-        
-        $(document).ready(function(){
-            $("#controlpad").click(function(e){
-                if(!$("#padon").prop("checked")) return;
-                var parentOffset = $(this).parent().offset();
-                var cenx = ($(this).width()/2);
-                var ceny = ($(this).height()/2);
-                var relX = parseInt((((e.pageX - parentOffset.left - cenx)/cenx)*90)+90);
-                var relY = parseInt(((-1*(e.pageY - parentOffset.top - (ceny+62))/ceny)*90)+90);
-                $("#padcoords").html("Pan: "+relX +"°"+ " Tilt: "+relY+"°");
-                query("rotate", "name=TILT&angle="+relY);
-                query("rotate", "name=PAN&angle="+relX);
-            });
+        /*$(document).ready(function(){
 
-            $("#up-rotate").click(function(){
-                cam_tilt += parseFloat($("#tiltspeed").val());
-                command("rotate", "name=TILT&angle="+cam_tilt);
-            });
-
-            $("#down-rotate").click(function(){
-                cam_tilt -= parseFloat($("#tiltspeed").val());
-                command("rotate", "name=TILT&angle="+cam_tilt);
-            });
-
-            $("#right-rotate").click(function(){
-                cam_pan += parseFloat($("#panspeed").val());
-                command("rotate", "name=PAN&angle="+cam_pan);
-            });
-
-            $("#left-rotate").click(function(){
-                cam_pan -= parseFloat($("#panspeed").val());
-                command("rotate", "name=PAN&angle="+cam_pan);
-            });
-            
-            $("#up-move").click(function(){
-                speed = parseFloat($("#movespeed").val());
-                command("move", "leftFore=-"+speed+"&leftAft=-"+(speed)+"&rightFore="+speed+"&rightAft="+speed);
-            });
-
-            $("#down-move").click(function(){
-                speed = parseFloat($("#movespeed").val());
-                command("move", "leftFore="+speed+"&leftAft="+(speed)+"&rightFore=-"+speed+"&rightAft=-"+speed);
-            });
-
-            $("#right-move").click(function(){
-                speed = parseFloat($("#movespeed").val());
-                command("move", "leftFore=-"+speed+"&leftAft=-"+(speed)+"&rightFore=-"+speed+"&rightAft=-"+speed);
-            });
-
-            $("#left-move").click(function(){
-                speed = parseFloat($("#movespeed").val());
-                command("move", "leftFore="+speed+"&leftAft="+(speed)+"&rightFore="+speed+"&rightAft="+speed);
-            });
-            
-            $("#stop").click(function(){
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
-            });
-      });
+        });
+        */
     </script>
     
     <!-- Icons -->
@@ -415,7 +263,9 @@
     <script>
       feather.replace()
     </script>
-    
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <!-- Graphs -->
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script>
       var ctx = document.getElementById("myChart");
@@ -446,6 +296,10 @@
         }
       });
     </script>
-   
+    
   </body>
 </html>
+
+
+
+ 
