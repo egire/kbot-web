@@ -89,6 +89,21 @@ function login(data="") {
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.send(data);
 }
+function register(data="") {
+    var url = "http://moonman1.mynetgear.com:8000/";
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            if(this.responseText) {
+               
+            } else {$("#status").html("Authetication failed.");}
+        }
+    };
+    xhttp.open("POST", url+"login", true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(data);
+}
 
 function log(data="") {
     var url = "http://moonman1.mynetgear.com:8000/";
