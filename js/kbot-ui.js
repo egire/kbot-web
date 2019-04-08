@@ -81,7 +81,7 @@ function updateswitches(id) {
     $.each(json, function(i, pin) {
         if(pin.type == "GPIO") {
             $("#"+id).append('<button onclick="query(\'switch\',\'name='+pin.name+'\');">'+pin.name+'</button><br>');}
-        else if (pin.type == “IC2”) {
+        else if (pin.type == "IC2") {
             //$("#buttons").append('<input onchage="rotate('$(this).attr('value'))" placeholder="'+pin.name+'" id="'+pin.name+'">');
             //$("#buttons").append('<button onclick="query(\'rotate\', name=\''+pin.name+'\' angle=\'$("#'+pin.name+'").val();\'>Rotate</button><br>');
         }
