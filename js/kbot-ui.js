@@ -7,6 +7,8 @@ $(document).ready(function(){
             updateswitches("switches");}
         if($("#updatelogs").prop("checked")) {
             log("tail=False&maxlines=50");}
+        if($("#updatesensors").prop("checked")) {
+            query("sensor", "name=PING");}
     }, 1000); 
     
     setInterval(function(){  
