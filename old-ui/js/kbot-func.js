@@ -1,5 +1,3 @@
-var url = "http://th3ri5k.mynetgear.com:8000/";
-
 $(document).ready(function(){
     $("#load").click(function(){
         command("load");
@@ -37,6 +35,7 @@ $(document).ready(function(){
 });
 
 function query(type, data="") {
+    var url = "http://th3ri5k.mynetgear.com:8000/";
     var xhttp = new XMLHttpRequest();
     var token = getCookie("token");
     var username = getCookie("username");
@@ -46,7 +45,7 @@ function query(type, data="") {
             json = JSON.parse(this.responseText);
         }
     };
-    xhttp.open("POST", url+type+"?"+data, true);
+    xhttp.open("GET", url+type+"?"+data, true);
     xhttp.send();
 }
 
@@ -56,6 +55,7 @@ function getCookie(name) {
 }
 
 function command(type, data="") {
+    var url = "http://th3ri5k.mynetgear.com:8000/";
     var xhttp = new XMLHttpRequest();
     var token = getCookie("token");
     var username = getCookie("username");
@@ -71,6 +71,7 @@ function command(type, data="") {
 }
 
 function login(data="") {
+    var url = "http://th3ri5k.mynetgear.com:8000/";
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -90,6 +91,7 @@ function login(data="") {
 }
 
 function log(data="") {
+    var url = "http://th3ri5k.mynetgear.com:8000/";
     var xhttp = new XMLHttpRequest();
     var token = getCookie("token");
     console.log(token);
@@ -100,7 +102,7 @@ function log(data="") {
             $("#logs").html(this.responseText);
         }
     };
-    xhttp.open("POST", url+"log?"+data, true);    
+    xhttp.open("GET", url+"log?"+data, true);    
     console.log(url+"log?"+data)
     xhttp.send();
 }
