@@ -8,7 +8,15 @@ $(document).ready(function(){
         if($("#updatelogs").prop("checked")) {
             log("tail=False&maxlines=50");}
         if($("#updatesensors").prop("checked")) {
-            query("sensor", "name=PING");}
+            query("sensor", "name=PING");
+            myChart.data.labels.push(json["t"]);
+            myChart.data.datasets.forEach((dataset) => {
+                if(!json) return;
+                dataset.data.push(json);
+            });
+            myChart.update();
+        }
+        
     }, 1000); 
     
     setInterval(function(){  
@@ -71,6 +79,10 @@ $(document).keydown(function(key) {
 });
 
 function displayJSON() {
+    $("#json").html(JSON.stringify(json));
+}
+
+function displaySensors() {
     $("#json").html(JSON.stringify(json));
 }
 
