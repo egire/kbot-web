@@ -8,13 +8,7 @@ $(document).ready(function(){
         if($("#updatelogs").prop("checked")) {
             log("tail=False&maxlines=50");}
         if($("#updatesensors").prop("checked")) {
-            query("sensor", "name=PING");
-            myChart.data.labels.push(json["t"]);
-            myChart.data.datasets.forEach((dataset) => {
-                if(!json) return;
-                dataset.data.push(json);
-            });
-            myChart.update();
+            displaySensors();
         }
         
     }, 1000); 
@@ -83,7 +77,13 @@ function displayJSON() {
 }
 
 function displaySensors() {
-    $("#json").html(JSON.stringify(json));
+    query("sensor", "name=PING");
+    myChart.data.labels.push(json["t"]);
+    myChart.data.datasets.forEach((dataset) => {
+        if(!json) return;
+        dataset.data.push(json);
+    });
+    myChart.update();
 }
 
 function displayLog() {
