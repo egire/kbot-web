@@ -112,6 +112,7 @@
             </div>
             <div id="cameracontrols">
                 <h4>Camera</h4>
+                <div>Enabled Arrow Keys: <input type="checkbox" id="enableDir" value="diron"></div>
                 <div>Control Pad Enabled: <input type="checkbox" id="padon" value="padon"></div>
                 <div id="controlpadrotate" style="height: 200px; width: 200px"></div>
                 <div id="padcoordsrotate"></div>
@@ -125,10 +126,9 @@
                     <input type="number" name="panspeed" value="10" id="panspeed" placeholder="Pan Speed"><br>
                     <input type="number" name="tiltspeed" value="10" id="tiltspeed" placeholder="Tilt Speed">
                 </div>
-                <div>Rave Mode Enabled: <input type="checkbox" id="animon" name="animon" value="animon"></div>
             </div>
             <div id="trackcontrols">
-                <h4>Tracks</h4>
+                <h4>Movement</h4>
                 <h5>Digital</h5>
                 <div>Enabled WASD: <input type="checkbox" id="enableWASD" value="wasdon"></div>
                 <button class="dircontrol" id="up-move" style="margin-left: 32px;">&#8593;</button>
@@ -189,7 +189,6 @@
                 $("#padcoords").html("Pan: "+relX +"�"+ " Tilt: "+relY+"�");
                 query("rotate", "name=TILT&angle="+relY);
                 query("rotate", "name=PAN&angle="+relX);
-                console.log("Rotate test");
             });
 
             $("#up-rotate").click(function(){
