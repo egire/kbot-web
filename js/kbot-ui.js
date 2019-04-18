@@ -15,7 +15,7 @@ $(document).ready(function(){
             displaySensors();
         }
         
-    }, 1000); 
+    }, 250); 
     
     setInterval(function(){  
         var video = "http://th3ri5k.mynetgear.com/video/cam_pic.php";
@@ -164,13 +164,21 @@ function displayJSON() {
 }
 
 function displaySensors() {
-    query("sensor", "name=PING");
+    /*query("sensor", "name=PING");
     myChart.data.labels.push(json["t"]);
     myChart.data.datasets.forEach((dataset) => {
         if(!json) return;
         dataset.data.push(json);
     });
-    myChart.update();
+    myChart.update();*/
+    
+    query("sensor", "name=LENCODER");
+    myChart2.data.labels.push(json["t"]);
+    myChart2.data.datasets.forEach((dataset) => {
+        if(!json) return;
+        dataset.data.push(json);
+    });
+    myChart2.update();
 }
 
 function displayLog() {

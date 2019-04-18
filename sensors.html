@@ -102,6 +102,11 @@
           <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="659" height="278" style="display: block; width: 659px; height: 278px;">
 
         </div>
+        
+       <div> 
+          <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart2" width="659" height="278" style="display: block; width: 659px; height: 278px;">
+
+        </div>
          
             
              </main>
@@ -144,6 +149,40 @@
             data: {
               datasets: [{
                 label: 'Ultrasonic Distance',
+                data: json,
+                lineTension: 0,
+                backgroundColor: 'transparent',
+                borderColor: '#007bff',
+                borderWidth: 1,
+                pointBackgroundColor: '#007bff'
+              }]
+            },
+            options: {
+              responsive: true,
+              title: {
+                  display: true
+              },
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: false,
+                    suggestedMin: 0.02,
+                    suggestedMax: 3
+                  }
+                }]                  
+              },
+              legend: {
+                display: true,
+              }
+            }
+          });
+          
+        var ctx2 = document.getElementById("myChart2");
+        var myChart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+              datasets: [{
+                label: 'Encoder State',
                 data: json,
                 lineTension: 0,
                 backgroundColor: 'transparent',
