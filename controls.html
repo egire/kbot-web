@@ -123,8 +123,11 @@
                     <button class="dircontrol" id="down-rotate">&#8595;</button>
                     <button class="dircontrol" id="right-rotate">&#8594;</button>
                     <h5>Pan Speed/Tilt Speed</h5>
-                    <input type="number" name="panspeed" value="10" id="panspeed" placeholder="Pan Speed"><br>
-                    <input type="number" name="tiltspeed" value="10" id="tiltspeed" placeholder="Tilt Speed">
+                    <input type="number" name="panspeed" value="1.0" id="panspeed" placeholder="Pan Speed"><br>
+                    <input type="number" name="tiltspeed" value="1.0" id="tiltspeed" placeholder="Tilt Speed">
+                </div>
+                <div>
+                <button id="centercamera">Center Camera</button>
                 </div>
             </div>
             <div id="trackcontrols">
@@ -137,7 +140,7 @@
                     <button class="dircontrol" id="down-move">&#8595;</button>
                     <button class="dircontrol" id="right-move">&#8594;</button>
                     <h5>Move speed</h5>
-                    <input type="number" value="1.0" step="0.1" max="1.0" min="0.0" id="movespeed" placeholder="Pan Speed">
+                    <input type="number" value="0.8" step="0.1" max="1.0" min="0.0" id="movespeed" placeholder="Pan Speed">
                 </div>
                 <button type="number" value="0" id="stop">Stop</button>
             </div>
@@ -175,8 +178,11 @@
     
     <script type="text/javascript">
         var cam_pan = 90;
-        var cam_tilt = 90;
+        var cam_tilt = 100;
         var json;
+        
+        centerCamera();
+        command("load");
         
         $(document).ready(function(){
             $("#controlpadrotate").click(function(e){
@@ -229,6 +235,10 @@
             $("#left-move").click(function(){
                 speed = parseFloat($("#movespeed").val());
                 command("move", "leftFore="+speed+"&leftAft="+(speed)+"&rightFore="+speed+"&rightAft="+speed);
+            });
+            
+            $("#centercamera").click(function(){
+                centerCamera();
             });
             
             $("#stop").click(function(){

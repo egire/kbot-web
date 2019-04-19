@@ -73,6 +73,10 @@ function command(type, data="") {
 function login(data="") {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
+        if (this.status != 200) {
+            $("#status").html("Server unavailable.");
+            $("#status").show();
+        }
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
             if(this.responseText) {

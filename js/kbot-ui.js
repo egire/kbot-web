@@ -1,6 +1,6 @@
 var keyUp, keyDown, keyLeft, keyRight, keyW, keyA, keyS, keyD;
-var cam_pan = 90;
-var cam_tilt = 90;
+var cam_pan = 98;
+var cam_tilt = 110;
 
 $(document).ready(function(){
     setInterval(function(){
@@ -14,10 +14,7 @@ $(document).ready(function(){
         if($("#updatesensors").prop("checked")) {
             displaySensors();
         }
-        
-    }, 250); 
-    
-    setInterval(function(){  
+       
         var video = "http://th3ri5k.mynetgear.com/video/cam_pic.php";
         $("#video").attr("src", video+"?time="+new Date().getTime());
 
@@ -39,25 +36,28 @@ $(document).ready(function(){
         }
     }, 250);
     
-    
     setInterval(function(){  
         if(keyUp){
             cam_tilt += parseFloat($("#tiltspeed").val());
+            cam_tilt = clamp(cam_tilt, 50.0, 180.0);
             command("rotate", "name=TILT&angle="+cam_tilt);
         }
         if(keyDown){
             cam_tilt -= parseFloat($("#tiltspeed").val());
+            cam_tilt = clamp(cam_tilt, 50.0, 180.0);
             command("rotate", "name=TILT&angle="+cam_tilt);
         }
         if(keyLeft){
             cam_pan -= parseFloat($("#panspeed").val());
+            cam_pan = clamp(cam_pan, 50.0, 180.0);
             command("rotate", "name=PAN&angle="+cam_pan);
         }
         if(keyRight){
             cam_pan += parseFloat($("#panspeed").val());
+            cam_pan = clamp(cam_pan, 50.0, 180.0);
             command("rotate", "name=PAN&angle="+cam_pan);
         }
-    }, 250);
+    }, 33);
     
     $("#camera").draggable(); 
     
@@ -73,19 +73,15 @@ $(document).keyup(function(key) {
     if($("#enableDir").prop("checked")) {
         switch(key.which) {
             case 37: // left
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 keyLeft = false;
                 break;
             case 38: // up
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 keyUp = false;
                 break;
             case 39: // right
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 keyRight = false;
                 break;
             case 40: // down
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 keyDown = false;
                 break;
         }
@@ -107,6 +103,9 @@ $(document).keydown(function(key) {
                 break;
             case 40: // down
                 keyDown = true;
+                break;
+            case 69: //
+                centerCamera();
                 break;
             default: return; 
         }
@@ -158,6 +157,19 @@ $(document).keydown(function(key) {
         key.preventDefault();
     }
 });
+
+function clamp(value, min=-1.0, max=1.0) {
+    if (value > max) {return max;}
+    if (value < min) {return min;}
+    return value;
+}
+
+function centerCamera() {
+    cam_pan = 98;
+    cam_tilt = 110;
+    command("rotate", "name=TILT&angle="+cam_tilt);
+    command("rotate", "name=PAN&angle="+cam_pan);
+}
 
 function displayJSON() {
     $("#json").html(JSON.stringify(json));
