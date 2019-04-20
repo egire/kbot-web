@@ -13,9 +13,12 @@ $(document).ready(function(){
         var name = $("#name").val();
         var pin = $("#pin").val();
         var type = $("#type").val();
-        var min = $("#min").val();
-        var max = $("#max").val();
-        command("add", "name="+name+"&pin="+pin+"&type="+type+"&min="+min+"&max="+max);
+        var mode = $("#mode").val();
+        var omin = $("#omin").val();
+        var omax = $("#omax").val();
+        var imin = $("#imin").val();
+        var imax = $("#imax").val();
+        command("add", "name="+name+"&pin="+pin+"&type="+type+"&mode="+mode+"&imin="+imin+"&imax="+imax+"&omin="+omin+"&omax="+omax);
     });
     
     $("#delete").click(function(){

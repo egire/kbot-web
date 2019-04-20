@@ -18,7 +18,7 @@ $(document).ready(function(){
         var video = "http://th3ri5k.mynetgear.com/video/cam_pic.php";
         $("#video").attr("src", video+"?time="+new Date().getTime());
 
-    }, 250); 
+    }, 500); 
     
     setInterval(function(){  
         var movementSpeed = parseFloat($("#movespeed").val());
@@ -49,12 +49,12 @@ $(document).ready(function(){
         }
         if(keyLeft){
             cam_pan -= parseFloat($("#panspeed").val());
-            cam_pan = clamp(cam_pan, 50.0, 180.0);
+            cam_pan = clamp(cam_pan, 10.0, 180.0);
             command("rotate", "name=PAN&angle="+cam_pan);
         }
         if(keyRight){
             cam_pan += parseFloat($("#panspeed").val());
-            cam_pan = clamp(cam_pan, 50.0, 180.0);
+            cam_pan = clamp(cam_pan, 10.0, 180.0);
             command("rotate", "name=PAN&angle="+cam_pan);
         }
     }, 33);
@@ -176,14 +176,14 @@ function displayJSON() {
 }
 
 function displaySensors() {
-    /*query("sensor", "name=PING");
+    query("sensor", "name=PING");
     myChart.data.labels.push(json["t"]);
     myChart.data.datasets.forEach((dataset) => {
         if(!json) return;
         dataset.data.push(json);
     });
-    myChart.update();*/
-    
+    myChart.update();
+    /*
     query("sensor", "name=LENCODER");
     myChart2.data.labels.push(json["t"]);
     myChart2.data.datasets.forEach((dataset) => {
@@ -191,6 +191,7 @@ function displaySensors() {
         dataset.data.push(json);
     });
     myChart2.update();
+    */
 }
 
 function displayLog() {
@@ -200,7 +201,7 @@ function displayLog() {
 function updateswitches(id) {
     $("#"+id).html("");
     $.each(json, function(i, pin) {
-        if(pin.type == "GPIO") {
+        if(pin.type == "GPIO" && pin.mode == "OUT") {
             $("#"+id).append('<button onclick="query(\'switch\',\'name='+pin.name+'\');">'+pin.name+'</button><br>');}
         else if (pin.type == "IC2") {
             //$("#buttons").append('<input onchage="rotate('$(this).attr('value'))" placeholder="'+pin.name+'" id="'+pin.name+'">');

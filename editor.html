@@ -98,12 +98,22 @@
                 <input type="text" name="pin" id="pin" placeholder="Pin ID (ex. P8_1)">
                 <select name="type" id="type">
                     <option value="GPIO">GPIO</option>
+                    <option value="MOTOR">MOTOR</option>
                     <option value="SERVO">SERVO</option>
                     <option value="PWM">PWM</option>
+                </select>
+                <select name="mode" id="mode">
+                    <option value="IN">IN</option>
+                    <option value="OUT">OUT</option>
                 </select> 
                 <br>
-                <input type="text" name="min" id="min" size="10" placeholder="Range (min)">
-                <input type="text" name="max" id="max" size="10" placeholder="Range (max)">
+                <input type="text" name="state" id="state" size="10" placeholder="State (0/1)">
+                <br>
+                <input type="text" name="omin" id="min" size="12" placeholder="Out Range (min)">
+                <input type="text" name="omax" id="max" size="12" placeholder="Out Range (max)">
+                <br>
+                <input type="text" name="imin" id="min" size="12" placeholder="In Range (min)">
+                <input type="text" name="imax" id="max" size="12" placeholder="In Range (max)">
                 <br>
                 <button id="add">Add</button>
                 <button id="delete">Delete</button>
@@ -152,39 +162,5 @@
     <script>
       feather.replace()
     </script>
-
-    <!-- Graphs -->
-    <!--
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-    <script>
-      var ctx = document.getElementById("myChart");
-      var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          datasets: [{
-            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-            lineTension: 0,
-            backgroundColor: 'transparent',
-            borderColor: '#007bff',
-            borderWidth: 4,
-            pointBackgroundColor: '#007bff'
-          }]
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: false
-              }
-            }]
-          },
-          legend: {
-            display: false,
-          }
-        }
-      });
-    </script>
-    -->
   </body>
 </html>
