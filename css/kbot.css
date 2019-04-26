@@ -5,3 +5,7 @@
 @media only screen and (max-width: 400px) {
   #camera {width: 200px; height: 112px;}
 }
+
+.sidebar {
+    top: 40px !important;
+}

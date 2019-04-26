@@ -96,8 +96,8 @@
                     <span style="width: 25px; height: auto; background-color: black; color: white; border: 1px solid white; position: absolute; right: 5px" data-feather="maximize-2"></span>
                 </div>
             </div>
-            <div>Update Sensors: <input type="checkbox" id="updatesensors" value="sensorson" checked></div>
-            
+            <div>Update Sensors: <input type="checkbox" id="updatesensors" value="sensorson"></div>
+            <button id="sweep">Sweep</button>
 		<div> 
           <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="659" height="278" style="display: block; width: 659px; height: 278px;">
 
@@ -260,15 +260,46 @@
     <script>
       feather.replace()
     </script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <!-- Graphs -->
    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script>
       var url = "http://th3ri5k.mynetgear.com:8000/";
       var json;
-        var ctx = document.getElementById("myChart");
-        var myChart = new Chart(ctx, {
+      
+      command("load");
+     
+    /*
+      var ctx = document.getElementById("myChart");
+      var scatterChart = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Scatter Dataset',
+                    data: [{
+                        x: -10,
+                        y: 0
+                    }, {
+                        x: 0,
+                        y: 10
+                    }, {
+                        x: 10,
+                        y: 5
+                    }]
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        type: 'linear',
+                        position: 'bottom'
+                    }]
+                }
+            }
+        });
+      */
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
             type: 'line',
             data: {
               datasets: [{
@@ -296,11 +327,11 @@
                 }]                  
               },
               legend: {
-                display: true,
+                display: true, 
               }
             }
           });
-          
+        /*
         var ctx2 = document.getElementById("myChart2");
         var myChart2 = new Chart(ctx2, {
             type: 'line',
@@ -333,7 +364,7 @@
                 display: true,
               }
             }
-          });
+          });*/
     </script>
     
   </body>

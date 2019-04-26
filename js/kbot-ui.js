@@ -8,11 +8,11 @@ $(document).ready(function(){
             query("json");
             displayJSON();}
         if($("#updateswitches").prop("checked")) {
-            updateswitches("switches");}
+            updateSwitches("switches");}
         if($("#updatelogs").prop("checked")) {
             log("tail=False&maxlines=50");}
         if($("#updatesensors").prop("checked")) {
-            displaySensors();
+            updateSensors();
         }
        
         var video = "http://th3ri5k.mynetgear.com/video/cam_pic.php";
@@ -66,6 +66,10 @@ $(document).ready(function(){
             $("#camera").attr("style", "width: 400px; height: 225px;");
         } else {
         $("#camera").attr("style", "width: 512px; height: 288px;");}
+    });
+    
+    $("#sweep").click(function (){
+        query("sweep");
     });
 });
 
@@ -158,7 +162,7 @@ $(document).keydown(function(key) {
     }
 });
 
-function clamp(value, min=-1.0, max=1.0) {
+function clamp(value=0, min=-1.0, max=1.0) {
     if (value > max) {return max;}
     if (value < min) {return min;}
     return value;
@@ -175,30 +179,30 @@ function displayJSON() {
     $("#json").html(JSON.stringify(json));
 }
 
-function displaySensors() {
+function updateSensors() {
+    console.log(json);
     query("sensor", "name=PING");
-    myChart.data.labels.push(json["t"]);
+    if (!json) {return;}
+    /*scatterChart.data.datasets.forEach((dataset) => {
+       dataset.data.push(json);
+    });
+    scatterChart.update();
+    */
+    
+    //query("sensor", "name=LENCODER");
+    myChart.data.labels.push(json["x"]);
     myChart.data.datasets.forEach((dataset) => {
-        if(!json) return;
         dataset.data.push(json);
     });
     myChart.update();
-    /*
-    query("sensor", "name=LENCODER");
-    myChart2.data.labels.push(json["t"]);
-    myChart2.data.datasets.forEach((dataset) => {
-        if(!json) return;
-        dataset.data.push(json);
-    });
-    myChart2.update();
-    */
+    json = false;
 }
 
 function displayLog() {
     //$("#logs").html(json);
 }
 
-function updateswitches(id) {
+function updateSwitches(id) {
     $("#"+id).html("");
     $.each(json, function(i, pin) {
         if(pin.type == "GPIO" && pin.mode == "OUT") {
