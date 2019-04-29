@@ -1,6 +1,7 @@
 var keyUp, keyDown, keyLeft, keyRight, keyW, keyA, keyS, keyD;
 var cam_pan = 98;
 var cam_tilt = 110;
+var video = "http://moonman1.mynetgear.com/video"
 
 $(document).ready(function(){
     setInterval(function(){
@@ -11,14 +12,15 @@ $(document).ready(function(){
             updateSwitches("switches");}
         if($("#updatelogs").prop("checked")) {
             log("tail=False&maxlines=50");}
+       
+        $("#video").attr("src", video+"/cam_pic.php?time="+new Date().getTime());
+    }, 500);
+    
+    setInterval(function(){
         if($("#updatesensors").prop("checked")) {
             updateSensors();
         }
-       
-        var video = "http://th3ri5k.mynetgear.com/video/cam_pic.php";
-        $("#video").attr("src", video+"?time="+new Date().getTime());
-
-    }, 500); 
+    }, 250);
     
     setInterval(function(){  
         var movementSpeed = parseFloat($("#movespeed").val());

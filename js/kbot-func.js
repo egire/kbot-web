@@ -1,8 +1,34 @@
-var url = "http://th3ri5k.mynetgear.com:8000/";
+var url = "http://moonman1.mynetgear.com:8000/";
+var video = "http://moonman1.mynetgear.com/video"
+
+function getCookie(name) {
+    var cookie = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (cookie) return cookie[2];
+}
 
 $(document).ready(function(){
     $("#load").click(function(){
         command("load");
+    });
+    
+    $("#login").click(function(){
+        var username = $("#username").val();
+        var password = $("#password").val();
+        login("username="+username+"&password="+password);
+    });
+    
+    $("#logout").click(function(){
+        document.cookie = "username=";
+        document.cookie = "token=";
+        window.location = "./";
+    });
+    
+    $("#register").click(function(){
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var email = $("#email").val();
+        register("username="+username+"&email="+email+"&password="+password);
+        window.location = "./";
     });
     
     $("#save").click(function(){
@@ -26,6 +52,18 @@ $(document).ready(function(){
         query("delete", "name="+name);
     });
     
+    $("#camerastart").click(function(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", video + "/cmd_pipe.php?cmd=ru 1", true);
+        xhttp.send();
+    });
+    
+    $("#camerastop").click(function(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", video + "/cmd_pipe.php?cmd=ru 0", true);
+        xhttp.send();
+    });
+    
     $("#switch").click(function(){
         var name = $("#select").val();
         command("switch", "name="+name);
@@ -47,40 +85,36 @@ function query(type, data="") {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             json = JSON.parse(this.responseText);
+        } else if (this.readyState != 4 && this.status == 200) {
+            xhttp = new XMLHttpRequest();
         }
     };
     xhttp.open("POST", url+type+"?"+data, true);
     xhttp.send();
 }
 
-function getCookie(name) {
-    var cookie = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-    if (cookie) return cookie[2];
-}
-
 function command(type, data="") {
-    var xhttp = new XMLHttpRequest();
+    var cmd = new XMLHttpRequest();
     var token = getCookie("token");
     var username = getCookie("username");
     data = "username=" + username + "&token=" + token + "&" + data;
-    xhttp.onreadystatechange = function() {
+    cmd.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             result = this.responseText;
         }
     };
-    xhttp.open("POST", url+type, true);
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send(data);
+    cmd.open("POST", url+type, true); // async
+    cmd.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    cmd.send(data);
 }
 
 function login(data="") {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    var login = new XMLHttpRequest();
+    login.onreadystatechange = function() {
         if (this.status != 200) {
             $("#status").html("Server unavailable.");
             $("#status").show();
-        }
-        if (this.readyState == 4 && this.status == 200) {
+        } else if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
             if(this.responseText) {
                 json = JSON.parse(this.responseText);
@@ -95,37 +129,35 @@ function login(data="") {
             }
         }
     };
-    xhttp.open("POST", url+"login", true);
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send(data);
+    login.open("POST", url+"login", true);
+    login.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    login.send(data);
 }
 
 function register(data="") {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    var register = new XMLHttpRequest();
+    register.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
             $("#status").html(this.responseText);
             $("#status").show();
         }
     };
-    xhttp.open("POST", url+"register", true);
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send(data);
+    register.open("POST", url+"register", true);
+    register.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    register.send(data);
 }
 
 function log(data="") {
-    var xhttp = new XMLHttpRequest();
+    var log = new XMLHttpRequest();
     var token = getCookie("token");
-    console.log(token);
     var username = getCookie("username");
     data = "username=" + username + "&token=" + token + "&" + data;
-    xhttp.onreadystatechange = function() {
+    log.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             $("#logs").html(this.responseText);
         }
     };
-    xhttp.open("POST", url+"log?"+data, true);    
-    console.log(url+"log?"+data)
-    xhttp.send();
+    log.open("POST", url+"log?"+data, true);    
+    log.send();
 }

@@ -27,7 +27,7 @@
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
+          <a id="logout" class="nav-link" href="#">Sign out</a>
         </li>
       </ul>
     </nav>
@@ -107,11 +107,18 @@
             </div>
             <div id="gpio">
                 <h5>GPIO Switches</h5>
-                <div>Update switches: <input type="checkbox" id="updateswitches" value="update" checked></div>
+                <div>Update switches: <input type="checkbox" id="updateswitches" value="update"></div>
                 <div id="switches"></div>
             </div>
             <div id="cameracontrols">
                 <h4>Camera</h4>
+                <div>
+                <button id="camerastart">Start</button>
+                <button id="camerastop">Stop</button>
+                </div>
+                <div>
+                <button id="centercamera">Center</button>
+                </div>
                 <div>Enabled Arrow Keys: <input type="checkbox" id="enableDir" value="diron"></div>
                 <div>Control Pad Enabled: <input type="checkbox" id="padon" value="padon"></div>
                 <div id="controlpadrotate" style="height: 200px; width: 200px"></div>
@@ -125,9 +132,6 @@
                     <h5>Pan Speed/Tilt Speed</h5>
                     <input type="number" name="panspeed" value="1.0" id="panspeed" placeholder="Pan Speed"><br>
                     <input type="number" name="tiltspeed" value="1.0" id="tiltspeed" placeholder="Tilt Speed">
-                </div>
-                <div>
-                <button id="centercamera">Center Camera</button>
                 </div>
             </div>
             <div id="trackcontrols">
