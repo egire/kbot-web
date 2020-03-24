@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="icon" href="./favicon.ico">
 
     <title>KBot - Editor</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
@@ -19,7 +19,7 @@
 
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href=".">KBot Interface</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href=".">KBot Web Interface</a>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -36,7 +36,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="controls.html">
                   <span data-feather="home"></span>
-                  Controls 
+                  Controls
                 </a>
               </li>
 			   <li class="nav-item">
@@ -45,8 +45,8 @@
                   Sensors
                 </a>
               </li>
-             
-            
+
+
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Admin</span>
               <a class="d-flex align-items-center text-muted" href="#">
@@ -60,11 +60,11 @@
                   Pin Editor
                 </a>
               </li>
-             
+
               <li class="nav-item">
                 <a class="nav-link" href="logs.html">
                   <span data-feather="file-text"></span>
-                  Logs 
+                  Logs
                 </a>
               </li>
             </ul>
@@ -105,7 +105,7 @@
                 <select name="mode" id="mode">
                     <option value="IN">IN</option>
                     <option value="OUT">OUT</option>
-                </select> 
+                </select>
                 <br>
                 <input type="text" name="state" id="state" size="10" placeholder="State (0/1)">
                 <br>
@@ -127,7 +127,7 @@
             <div id="info">
                 <div>Auto-update JSON: <input type="checkbox" id="updatejson" name="updatejson" value="update"></div>
                 <div id="json"></div>
-            </div> 
+            </div>
         </main>
       </div>
     </div>
@@ -135,28 +135,28 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>    
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script
+    			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+    			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    			  crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
           integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
           crossorigin="anonymous"></script>
-    
+
     <!-- KBot core js -->
     <script type="text/javascript" src="js/kbot-ui.js"></script>
     <script type="text/javascript" src="js/kbot-func.js"></script>
     <script type="text/javascript">
         var url = "http://th3ri5k.mynetgear.com:8000/";
-        
+
         /*$(document).ready(function(){
 
         });
         */
     </script>
-    
+
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>

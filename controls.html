@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="icon" href="./favicon.ico">
 
     <title>KBot - Controls</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
     <style>
@@ -23,7 +22,7 @@
 
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./">KBot Interface</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./">KBot Web Interface</a>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -49,8 +48,8 @@
                   Sensors
                 </a>
               </li>
-             
-            
+
+
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Admin</span>
               <a class="d-flex align-items-center text-muted" href="#">
@@ -64,7 +63,7 @@
                   Pin Editor
                 </a>
               </li>
-             
+
               <li class="nav-item">
                 <a class="nav-link" href="logs.html">
                   <span data-feather="file-text"></span>
@@ -74,8 +73,23 @@
             </ul>
           </div>
         </nav>
+      </div>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+      <div id="camera" class="card">
+          <div class="card-header"><span class="badge badge-pill badge-warning">Camera Head</span><span style="width: 25px; height: auto; background-color: #ffc107; color: black; border: 1px solid black; position: absolute; right: 5px" data-feather="maximize-2"></span></div>
+          <div class="card-body">
+            <img id="video" src="http://th3ri5k.mynetgear.com/video/cam_pic.php">
+            <div class="text-center">
+              <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
+      </div>
+
+        <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
+
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">Controls</h2>
             <div class="btn-toolbar mb-2 mb-md-0">
@@ -90,74 +104,181 @@
               -->
             </div>
           </div>
+
           <!--
           <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
           -->
-        <div id="camera">
-            <img id="video" src="http://th3ri5k.mynetgear.com/video/cam_pic.php">
-            <div id="maximize">
-                <span style="width: 25px; height: auto; background-color: black; color: white; border: 1px solid white; position: absolute; right: 5px" data-feather="maximize-2"></span>
+        <div id="controls" class="row">
+            <div class="col-md-3">
+            <div id="cameracontrols" class="card">
+                <div class="card-header">Camera</div>
+                <div class="card-body">
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-success" id="camerastart">Start</button>
+                    <button class="btn btn-danger" id="camerastop">Stop</button>
+                    <button class="btn btn-light" id="centercamera">Center</button>
+                  </div>
+                  <div>&nbsp;</div>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <div class="btn-group-prepend">
+                        <div class="input-group-text">Arrow Keys</div>
+                      </div>
+                      <label class="btn btn-primary active">
+                        <input type="checkbox" id="enableDir" value="diron" checked>Enable
+                      </label>
+                  </div>
+                  <div>&nbsp;</div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Pan speed</span>
+                      <input class="form-control" type="number" name="panspeed" value="1.0" id="panspeed" placeholder="Pan Speed"><br>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Tilt speed</span>
+                      <input class="form-control" type="number" name="tiltspeed" value="1.0" id="tiltspeed" placeholder="Tilt Speed">
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div>&nbsp;</div>
+          <div id="cameradigital" class="card">
+              <div class="card-header">Camera Digital Control</div>
+              <div class="card-body">
+                <button class="dircontrol btn btn-dark" id="up-rotate" style="margin-left: 40px;">&#8593;</button>
+                <div class="input-group mb-3">
+                    <button class="dircontrol btn btn-dark" id="left-rotate">&#8592;</button>
+                    <button class="dircontrol btn btn-dark" id="down-rotate">&#8595;</button>
+                    <button class="dircontrol btn btn-dark" id="right-rotate">&#8594;</button>
+                </div>
+            </div>
+          </div>
+          <div>&nbsp;</div>
+          <div id="cameracontrolspad" class="card">
+              <div class="card-header">Camera Pad</div>
+              <div class="card-body">
+                <div class="col-md-4">
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <div class="btn-group-prepend">
+                        <div class="input-group-text">Control Pad</div>
+                      </div>
+                      <label class="btn btn-primary">
+                        <input type="checkbox" id="padon" value="padon"> Enable
+                      </label>
+                  </div>
+                  <div>&nbsp;</div>
+                  <div id="controlpadrotate" style="height: 200px; width: 200px"></div>
+                  <div id="padcoordsrotate"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div>&nbsp;</div>
+            <div class="row">
+            <div id="movementdigital" class="card">
+                <div class="card-header">Movement Digital</div>
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                      <button class="dircontrol btn btn-dark" id="up-move" style="margin-left: 40px;">&#8593;</button>
+                      <div class="input-group mb-3">
+                          <button class="dircontrol btn btn-dark" id="left-move">&#8592;</button>
+                          <button class="dircontrol btn btn-dark" id="down-move">&#8595;</button>
+                          <button class="dircontrol btn btn-dark" id="right-move">&#8594;</button>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+            <div id="trackcontrols" class="card">
+                <div class="card-header">Movement Settings</div>
+                <div class="card-body">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <div class="btn-group-prepend">
+                      <div class="input-group-text">WASD</div>
+                    </div>
+                    <label id="enableWASDLabel" class="btn btn-primary active">
+                      <input type="checkbox" id="enableWASD" value="wasdon" checked> Enable
+                    </label>
+                </div>
+                <div>&nbsp;</div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Move speed</span>
+                    <input class="form-control" type="number" value="0.8" step="0.1" max="1.0" min="0.0" id="movespeed" placeholder="Pan Speed">
+                  </div>
+                  <div class="input-group-append">
+                    <button class="btn btn-danger" type="number" value="0" id="stop">Stop</button>
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
-        <div id="controls">
-            <div id="pinedit">
-                <h5>Pin Select/GPIO/Servo</h5>
-                <input type="text" name="select" id="select" placeholder="Pin Name"><button id="switch">On/Off</button><br>
-                <input type="text" name="angle" id="angle" placeholder="Servo degrees (0-180)"><button id="rotate">Rotate</button>
-            </div>
-            <div id="gpio">
-                <h5>GPIO Switches</h5>
-                <div>Update switches: <input type="checkbox" id="updateswitches" value="update"></div>
-                <div id="switches"></div>
-            </div>
-            <div id="cameracontrols">
-                <h4>Camera</h4>
-                <div>
-                <button id="camerastart">Start</button>
-                <button id="camerastop">Stop</button>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="card" id="pinedit">
+                <div class="card-header">Pin Select/GPIO/Servo</div>
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                    <input class="form-control" type="text" name="select" id="select" placeholder="Pin Name">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" id="switch">On/Off</button>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <input class="form-control" type="text" name="angle" id="angle" placeholder="Servo degrees (0-180)">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" id="rotate">Rotate</button>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                <button id="centercamera">Center</button>
-                </div>
-                <div>Enabled Arrow Keys: <input type="checkbox" id="enableDir" value="diron"></div>
-                <div>Control Pad Enabled: <input type="checkbox" id="padon" value="padon"></div>
-                <div id="controlpadrotate" style="height: 200px; width: 200px"></div>
-                <div id="padcoordsrotate"></div>
-                <h5>Digital</h5>
-                <button class="dircontrol" id="up-rotate" style="margin-left: 32px;">&#8593;</button>
-                <div>
-                    <button class="dircontrol" id="left-rotate">&#8592;</button>
-                    <button class="dircontrol" id="down-rotate">&#8595;</button>
-                    <button class="dircontrol" id="right-rotate">&#8594;</button>
-                    <h5>Pan Speed/Tilt Speed</h5>
-                    <input type="number" name="panspeed" value="1.0" id="panspeed" placeholder="Pan Speed"><br>
-                    <input type="number" name="tiltspeed" value="1.0" id="tiltspeed" placeholder="Tilt Speed">
-                </div>
+              </div>
             </div>
-            <div id="trackcontrols">
-                <h4>Movement</h4>
-                <h5>Digital</h5>
-                <div>Enabled WASD: <input type="checkbox" id="enableWASD" value="wasdon"></div>
-                <button class="dircontrol" id="up-move" style="margin-left: 32px;">&#8593;</button>
-                <div>
-                    <button class="dircontrol" id="left-move">&#8592;</button>
-                    <button class="dircontrol" id="down-move">&#8595;</button>
-                    <button class="dircontrol" id="right-move">&#8594;</button>
-                    <h5>Move speed</h5>
-                    <input type="number" value="0.8" step="0.1" max="1.0" min="0.0" id="movespeed" placeholder="Pan Speed">
-                </div>
-                <button type="number" value="0" id="stop">Stop</button>
+            <div class="col-md-7">
+              <div id="gpio" class="card">
+                  <div class="card-header">GPIO Switches</div>
+                  <div class="card-body">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <div class="btn-group-prepend">
+                          <div class="input-group-text">Auto-update</div>
+                        </div>
+                        <label id="updateswitchesLabel" class="btn btn-primary">
+                          <input type="checkbox" id="updateswitches" name="updateswitches" value="update"> Enable
+                        </label>
+                    </div>
+                    <div id="switches"></div>
+                  </div>
+              </div>
             </div>
-        </div>  
-        <h4 id="config-title">Configuration</h4>
-        <div id="config">
-            <button id="load">Load</button>
+          </div>
+      <div>&nbsp;</div>
+      <div id="info" class="row">
+        <div class="col-md-3">
+        <div id="config" class="card">
+          <div class="card-header">Configuration</div>
+          <div class="card-body">
+              <button class="btn btn-primary" id="load">Load</button>
+          </div>
         </div>
-            <h4 id="json-title">JSON</h4>
-            <div id="info">
-                <div>Update JSON: <input type="checkbox" id="updatejson" name="updatejson" value="update"></div>
+        </div>
+        <div>&nbsp;</div>
+        <div class="col-md-7">
+          <div id="json-section" class="card">
+            <div class="card-header">JSON</div>
+            <div id="info" class="card-body">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <div class="btn-group-prepend">
+                      <div class="input-group-text">Auto-update</div>
+                    </div>
+                    <label id="updatejsonLabel" class="btn btn-primary">
+                      <input type="checkbox" id="updatejson" name="updatejson" value="update"> Enable
+                    </label>
+                </div>
                 <div id="json"> </div>
-            </div> 
+            </div>
+           </div>
+          </div>
           </div>
         </main>
       </div>
@@ -166,28 +287,28 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>    
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script
+    			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+    			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    			  crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
           integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
           crossorigin="anonymous"></script>
-    
+
     <!-- KBot core js -->
     <script type="text/javascript" src="js/kbot-ui.js"></script>
     <script type="text/javascript" src="js/kbot-func.js"></script>
-    
+
     <script type="text/javascript">
         var cam_pan = 90;
         var cam_tilt = 100;
         var json;
-        
+
         command("load");
         centerCamera();
-        
+
         $(document).ready(function(){
             $("#controlpadrotate").click(function(e){
                 if(!$("#padon").prop("checked")) return;
@@ -220,7 +341,7 @@
                 cam_pan -= parseFloat($("#panspeed").val());
                 command("rotate", "name=PAN&angle="+cam_pan);
             });
-            
+
             $("#up-move").click(function(){
                 speed = parseFloat($("#movespeed").val());
                 command("move", "leftFore=-"+speed+"&leftAft=-"+(speed)+"&rightFore="+speed+"&rightAft="+speed);
@@ -240,17 +361,21 @@
                 speed = parseFloat($("#movespeed").val());
                 command("move", "leftFore="+speed+"&leftAft="+(speed)+"&rightFore="+speed+"&rightAft="+speed);
             });
-            
+
             $("#centercamera").click(function(){
                 centerCamera();
             });
-            
+
             $("#stop").click(function(){
                 command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
             });
+
+            $("#enableWASDLabel").click(function(){
+                $("#enableWASD").prop("checked", !$("#enableWASD").prop("checked"));
+            });
       });
     </script>
-    
+
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>

@@ -1,7 +1,7 @@
 var keyUp, keyDown, keyLeft, keyRight, keyW, keyA, keyS, keyD;
 var cam_pan = 98;
 var cam_tilt = 110;
-var video = "http://moonman1.mynetgear.com/video"
+var video = "http://th3ri5k.mynetgear.com/video"
 
 $(document).ready(function(){
     setInterval(function(){
@@ -12,17 +12,17 @@ $(document).ready(function(){
             updateSwitches("switches");}
         if($("#updatelogs").prop("checked")) {
             log("tail=False&maxlines=50");}
-       
-        $("#video").attr("src", video+"/cam_pic.php?time="+new Date().getTime());
+
+        //$("#video").attr("src", video+"/cam_pic.php?time="+new Date().getTime());
     }, 500);
-    
+
     setInterval(function(){
         if($("#updatesensors").prop("checked")) {
             updateSensors();
         }
     }, 250);
-    
-    setInterval(function(){  
+
+    setInterval(function(){
         var movementSpeed = parseFloat($("#movespeed").val());
         if(keyW){
             command("move", "leftFore=-"+movementSpeed+"&leftAft=-"+movementSpeed+"&rightFore="+movementSpeed+"&rightAft="+movementSpeed);
@@ -37,8 +37,8 @@ $(document).ready(function(){
             command("move", "leftFore=-"+movementSpeed+"&leftAft=-"+movementSpeed+"&rightFore=-"+movementSpeed+"&rightAft=-"+movementSpeed);
         }
     }, 250);
-    
-    setInterval(function(){  
+
+    setInterval(function(){
         if(keyUp){
             cam_tilt += parseFloat($("#tiltspeed").val());
             cam_tilt = clamp(cam_tilt, 50.0, 180.0);
@@ -60,16 +60,16 @@ $(document).ready(function(){
             command("rotate", "name=PAN&angle="+cam_pan);
         }
     }, 33);
-    
-    $("#camera").draggable(); 
-    
+
+    $("#camera").draggable();
+
     $("#maximize").click(function (){
         if ($("#camera").css("width") == "512px") {
             $("#camera").attr("style", "width: 400px; height: 225px;");
         } else {
         $("#camera").attr("style", "width: 512px; height: 288px;");}
     });
-    
+
     $("#sweep").click(function (){
         query("sweep");
     });
@@ -113,7 +113,7 @@ $(document).keydown(function(key) {
             case 69: //
                 centerCamera();
                 break;
-            default: return; 
+            default: return;
         }
         key.preventDefault();
     }
@@ -158,11 +158,27 @@ $(document).keydown(function(key) {
             case 83: // down
                 keyS = true;
                 break;
-            default: return; 
+            default: return;
         }
         key.preventDefault();
     }
 });
+
+function getCamImage(element) {
+    $.ajax({
+      type: "GET",
+      url: video+"/cam_pic.php?time="+new Date().getTime(),
+      dataType: "image/jpg",
+      success: function(img) {
+        i = new Image();
+        i.src = img;
+        $(element).text(i);
+      },
+      error: function(error, txtStatus) {
+        return false;
+      }
+    });
+}
 
 function clamp(value=0, min=-1.0, max=1.0) {
     if (value > max) {return max;}
@@ -190,7 +206,7 @@ function updateSensors() {
     });
     scatterChart.update();
     */
-    
+
     //query("sensor", "name=LENCODER");
     myChart.data.labels.push(json["x"]);
     myChart.data.datasets.forEach((dataset) => {

@@ -1,5 +1,5 @@
-var url = "http://moonman1.mynetgear.com:8000/";
-var video = "http://moonman1.mynetgear.com/video"
+var url = "http://th3ri5k.mynetgear.com:8000/";
+var video = "http://th3ri5k.mynetgear.com/video"
 
 function getCookie(name) {
     var cookie = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -10,19 +10,19 @@ $(document).ready(function(){
     $("#load").click(function(){
         command("load");
     });
-    
+
     $("#login").click(function(){
         var username = $("#username").val();
         var password = $("#password").val();
         login("username="+username+"&password="+password);
     });
-    
+
     $("#logout").click(function(){
         document.cookie = "username=";
         document.cookie = "token=";
         window.location = "./";
     });
-    
+
     $("#register").click(function(){
         var username = $("#username").val();
         var password = $("#password").val();
@@ -30,7 +30,7 @@ $(document).ready(function(){
         register("username="+username+"&email="+email+"&password="+password);
         window.location = "./";
     });
-    
+
     $("#save").click(function(){
         command("save");
     });
@@ -46,29 +46,29 @@ $(document).ready(function(){
         var imax = $("#imax").val();
         command("add", "name="+name+"&pin="+pin+"&type="+type+"&mode="+mode+"&imin="+imin+"&imax="+imax+"&omin="+omin+"&omax="+omax);
     });
-    
+
     $("#delete").click(function(){
         var name = $("#name").val();
         query("delete", "name="+name);
     });
-    
+
     $("#camerastart").click(function(){
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", video + "/cmd_pipe.php?cmd=ru 1", true);
         xhttp.send();
     });
-    
+
     $("#camerastop").click(function(){
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", video + "/cmd_pipe.php?cmd=ru 0", true);
         xhttp.send();
     });
-    
+
     $("#switch").click(function(){
         var name = $("#select").val();
         command("switch", "name="+name);
     });
-    
+
     $("#rotate").click(function(){
         var name = $("#select").val();
         var angle = $("#angle").val();
@@ -124,7 +124,7 @@ function login(data="") {
                 $("#status").show();
                 window.location = "./controls.html";
             } else {
-                $("#status").html("Authetication failed."); 
+                $("#status").html("Authetication failed.");
                 $("#status").show();
             }
         }
@@ -158,6 +158,6 @@ function log(data="") {
             $("#logs").html(this.responseText);
         }
     };
-    log.open("POST", url+"log?"+data, true);    
+    log.open("POST", url+"log?"+data, true);
     log.send();
 }
