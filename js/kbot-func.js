@@ -1,4 +1,4 @@
-var url = "http://th3ri5k.mynetgear.com:8000/";
+var url = "http://localhost:8080/";
 var video = "http://th3ri5k.mynetgear.com/video"
 
 function getCookie(name) {
@@ -23,11 +23,12 @@ $(document).ready(function(){
         window.location = "./";
     });
 
-    $("#register").click(function(){
+    $("#register").submit(function(){
         var username = $("#username").val();
         var password = $("#password").val();
         var email = $("#email").val();
         register("username="+username+"&email="+email+"&password="+password);
+        event.preventDefault();
         window.location = "./";
     });
 
@@ -81,15 +82,18 @@ function query(type, data="") {
     var xhttp = new XMLHttpRequest();
     var token = getCookie("token");
     var username = getCookie("username");
+
     data = "username=" + username + "&token=" + token + "&" + data;
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            json = JSON.parse(this.responseText);
+            storage = JSON.parse(this.responseText);
         } else if (this.readyState != 4 && this.status == 200) {
             xhttp = new XMLHttpRequest();
         }
     };
+
     xhttp.open("POST", url+type+"?"+data, true);
+
     xhttp.send();
 }
 
@@ -97,12 +101,14 @@ function command(type, data="") {
     var cmd = new XMLHttpRequest();
     var token = getCookie("token");
     var username = getCookie("username");
+
     data = "username=" + username + "&token=" + token + "&" + data;
     cmd.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             result = this.responseText;
         }
     };
+
     cmd.open("POST", url+type, true); // async
     cmd.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     cmd.send(data);
@@ -111,20 +117,23 @@ function command(type, data="") {
 function login(data="") {
     var login = new XMLHttpRequest();
     login.onreadystatechange = function() {
+        $("#status").hide();
         if (this.status != 200) {
             $("#status").html("Server unavailable.");
             $("#status").show();
         } else if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+            // console.log(this.responseText);
             if(this.responseText) {
                 json = JSON.parse(this.responseText);
-                document.cookie = "username="+json[0]["username"];
-                document.cookie = "token="+json[0]["token"];
-                $("#status").html("Hello, "+json[0]["username"]+"!");
+                document.cookie = "username="+json["username"];
+                document.cookie = "token="+json["token"];
+                $("#status").html("Hello, "+json["username"]+"!");
                 $("#status").show();
+
                 window.location = "./controls.html";
             } else {
                 $("#status").html("Authetication failed.");
+
                 $("#status").show();
             }
         }
@@ -141,6 +150,12 @@ function register(data="") {
             console.log(this.responseText);
             $("#status").html(this.responseText);
             $("#status").show();
+
+            window.location = "./";
+        } else {
+          $("#status").html("Registration failed.");
+
+          $("#status").show();
         }
     };
     register.open("POST", url+"register", true);
@@ -152,6 +167,7 @@ function log(data="") {
     var log = new XMLHttpRequest();
     var token = getCookie("token");
     var username = getCookie("username");
+
     data = "username=" + username + "&token=" + token + "&" + data;
     log.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

@@ -5,16 +5,16 @@ var video = "http://th3ri5k.mynetgear.com/video"
 
 $(document).ready(function(){
     setInterval(function(){
-        if($("#updatejson").prop("checked")) {
-            query("json");
-            displayJSON();}
+        if($("#updatestorage").prop("checked")) {
+            query("storage");
+            displayStorage();}
         if($("#updateswitches").prop("checked")) {
             updateSwitches("switches");}
         if($("#updatelogs").prop("checked")) {
             log("tail=False&maxlines=50");}
 
         //$("#video").attr("src", video+"/cam_pic.php?time="+new Date().getTime());
-    }, 500);
+    }, 1000);
 
     setInterval(function(){
         if($("#updatesensors").prop("checked")) {
@@ -193,36 +193,54 @@ function centerCamera() {
     command("rotate", "name=PAN&angle="+cam_pan);
 }
 
-function displayJSON() {
-    $("#json").html(JSON.stringify(json));
+function displayStorage() {
+    display = "<table class='table table-sm'>\n<thead><tr>\
+                <th scope=\"col\">Pin Name</th>\n\
+                <th scope=\"col\">Type</th>\n\
+                <th scope=\"col\">Mode</th>\n\
+                <th scope=\"col\">ID</th>\n\
+                <th scope=\"col\">State</th>\n\
+              </tr>\n</thead>";
+
+    $.each(storage, function(key, val) {
+      display += "<tr>";
+      $.each(val, function(key, val)
+      {
+        display += "<td>"+val+"</td>\n";
+      });
+      display += "</tr>";
+    });
+
+    display += "</table>";
+
+    $("#storage").html(display);
 }
 
 function updateSensors() {
-    console.log(json);
     query("sensor", "name=PING");
-    if (!json) {return;}
+    if (!storage) { return; }
     /*scatterChart.data.datasets.forEach((dataset) => {
-       dataset.data.push(json);
+       dataset.data.push(storage);
     });
     scatterChart.update();
     */
 
     //query("sensor", "name=LENCODER");
-    myChart.data.labels.push(json["x"]);
+    myChart.data.labels.push(storage["x"]);
     myChart.data.datasets.forEach((dataset) => {
-        dataset.data.push(json);
+        dataset.data.push(storage);
     });
     myChart.update();
-    json = false;
+    storage = false;
 }
 
 function displayLog() {
-    //$("#logs").html(json);
+    $("#logs").html(storage);
 }
 
 function updateSwitches(id) {
     $("#"+id).html("");
-    $.each(json, function(i, pin) {
+    $.each(storage, function(i, pin) {
         if(pin.type == "GPIO" && pin.mode == "OUT") {
             $("#"+id).append('<button onclick="query(\'switch\',\'name='+pin.name+'\');">'+pin.name+'</button><br>');}
         else if (pin.type == "IC2") {

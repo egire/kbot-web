@@ -79,7 +79,7 @@
       <div id="camera" class="card">
           <div class="card-header"><span class="badge badge-pill badge-warning">Camera Head</span><span style="width: 25px; height: auto; background-color: #ffc107; color: black; border: 1px solid black; position: absolute; right: 5px" data-feather="maximize-2"></span></div>
           <div class="card-body">
-            <img id="video" src="http://th3ri5k.mynetgear.com/video/cam_pic.php">
+            <img id="video" src="">
             <div class="text-center">
               <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
@@ -237,7 +237,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-4">
               <div id="gpio" class="card">
                   <div class="card-header h6">GPIO Switches</div>
                   <div class="card-body">
@@ -265,19 +265,23 @@
         </div>
         </div>
         <div>&nbsp;</div>
-        <div class="col-md-7">
-          <div id="json-section" class="card">
-            <div class="card-header h6">JSON</div>
+        <div class="col-md-4">
+          <div id="storage-section" class="card">
+            <div class="card-header h6">Storage</div>
             <div id="info" class="card-body">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <div class="btn-group-prepend">
                       <div class="input-group-text">Auto-update</div>
                     </div>
-                    <label id="updatejsonLabel" class="btn btn-primary">
-                      <input type="checkbox" id="updatejson" name="updatejson" value="update"> Enable
+                    <label id="updatestorageLabel" class="btn btn-primary">
+                      <input type="checkbox" id="updatestorage" name="updatestorage" value="update"> Enable
                     </label>
                 </div>
-                <div id="json"> </div>
+                <div class="card">
+                  <div class="card-body">
+                    <div id="storage"></ul>
+                  </div>
+                </div>
             </div>
            </div>
           </div>
@@ -306,10 +310,10 @@
     <script type="text/javascript">
         var cam_pan = 90;
         var cam_tilt = 100;
-        var json;
+        var storage;
 
         command("load");
-        centerCamera();
+        //centerCamera();
 
         $(document).ready(function(){
             $("#controlpadrotate").click(function(e){

@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="./favicon.ico">
 
-    <title>KBot - Editor</title>
+    <title>KBot - Pin Editor</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -87,46 +87,81 @@
               -->
             </div>
           </div>
-            <div id="camera">
-                <img id="video" src="http://th3ri5k.mynetgear.com/video/cam_pic.php">
-                <div id="maximize">
-                    <span style="width: 25px; height: auto; background-color: black; color: white; border: 1px solid white; position: absolute; right: 5px" data-feather="maximize-2"></span>
+          <div id="camera" class="card">
+              <div class="card-header"><span class="badge badge-pill badge-warning">Camera Head</span><span style="width: 25px; height: auto; background-color: #ffc107; color: black; border: 1px solid black; position: absolute; right: 5px" data-feather="maximize-2"></span></div>
+              <div class="card-body">
+                <img id="video" src="">
+                <div class="text-center">
+                  <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              </div>
+          </div>
+            <div class="row">
+            <div id="editor" class="card">
+              <div class="card-header h6">New Pin</div>
+              <div class="card-body">
+                  <input class="form-control" type="text" name="name" size="32" id="name" placeholder="Pin Name"> <br>
+                  <input class="form-control" type="text" name="pin" id="pin" placeholder="Pin ID (ex. P8_1)">
+                  <select class="form-control" name="type" id="type">
+                      <option value="GPIO">GPIO</option>
+                      <option value="MOTOR">MOTOR</option>
+                      <option value="SERVO">SERVO</option>
+                      <option value="PWM">PWM</option>
+                  </select>
+                  <select class="form-control" name="mode" id="mode">
+                      <option value="IN">IN</option>
+                      <option value="OUT">OUT</option>
+                  </select>
+                  <input class="form-control" type="text" name="state" id="state" size="10" placeholder="State (0/1)">
+                  <input class="form-control" type="text" name="omin" id="min" size="12" placeholder="Out Range (min)">
+                  <input class="form-control" type="text" name="omax" id="max" size="12" placeholder="Out Range (max)">
+                  <input class="form-control" type="text" name="imin" id="min" size="12" placeholder="In Range (min)">
+                  <input class="form-control" type="text" name="imax" id="max" size="12" placeholder="In Range (max)">
+                  <div>&nbsp;</div>
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-primary" id="add">Add</button>
+                    <button class="btn btn-primary" id="delete">Delete</button>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div>&nbsp;</div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header h6">Configuration</div>
+                    <div class="card-body">
+                      <div class="btn-group" role="group">
+                        <button class="btn btn-primary" id="load">Load</button>
+                        <button class="btn btn-primary" id="save">Save</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
             </div>
-            <div id="editor">
-                <input type="text" name="name" size="32" id="name" placeholder="Pin Name"> <br>
-                <input type="text" name="pin" id="pin" placeholder="Pin ID (ex. P8_1)">
-                <select name="type" id="type">
-                    <option value="GPIO">GPIO</option>
-                    <option value="MOTOR">MOTOR</option>
-                    <option value="SERVO">SERVO</option>
-                    <option value="PWM">PWM</option>
-                </select>
-                <select name="mode" id="mode">
-                    <option value="IN">IN</option>
-                    <option value="OUT">OUT</option>
-                </select>
-                <br>
-                <input type="text" name="state" id="state" size="10" placeholder="State (0/1)">
-                <br>
-                <input type="text" name="omin" id="min" size="12" placeholder="Out Range (min)">
-                <input type="text" name="omax" id="max" size="12" placeholder="Out Range (max)">
-                <br>
-                <input type="text" name="imin" id="min" size="12" placeholder="In Range (min)">
-                <input type="text" name="imax" id="max" size="12" placeholder="In Range (max)">
-                <br>
-                <button id="add">Add</button>
-                <button id="delete">Delete</button>
-            </div>
-            <h4 id="config-title" >Configuration</h4>
-            <div id="config">
-                <button id="load">Load</button>
-                <button id="save">Save</button>
-            </div>
-            <h4  id="json-title">JSON</h4>
-            <div id="info">
-                <div>Auto-update JSON: <input type="checkbox" id="updatejson" name="updatejson" value="update"></div>
-                <div id="json"></div>
+            <div>&nbsp;</div>
+            <div class="col-md-6">
+              <div id="storage-section" class="card">
+                <div class="card-header h6">Storage</div>
+                <div id="info" class="card-body">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <div class="btn-group-prepend">
+                          <div class="input-group-text">Auto-update</div>
+                        </div>
+                        <label id="updatestorageLabel" class="btn btn-primary">
+                          <input type="checkbox" id="updatestorage" name="updatestorage" value="update"> Enable
+                        </label>
+                    </div>
+                    <div class="card">
+                      <div class="card-body">
+                        <div id="storage"></ul>
+                      </div>
+                    </div>
+                </div>
+               </div>
+              </div>
             </div>
         </main>
       </div>
@@ -149,7 +184,6 @@
     <script type="text/javascript" src="js/kbot-ui.js"></script>
     <script type="text/javascript" src="js/kbot-func.js"></script>
     <script type="text/javascript">
-        var url = "http://th3ri5k.mynetgear.com:8000/";
 
         /*$(document).ready(function(){
 
