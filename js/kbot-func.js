@@ -1,4 +1,4 @@
-var url = "http://th3ri5k.chickenkiller.com:8080/";
+var url = "http://th3ri5k.chickenkiller.com:8000/";
 var video = "http://th3ri5k.chickenkiller.com/video"
 
 function getCookie(name) {
