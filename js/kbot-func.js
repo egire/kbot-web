@@ -1,5 +1,5 @@
-var url = "http://localhost:8080/";
-var video = "http://th3ri5k.mynetgear.com/video"
+var url = "http://th3ri5k.chickenkiller.com:8080/";
+var video = "http://th3ri5k.chickenkiller.com/video"
 
 function getCookie(name) {
     var cookie = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
