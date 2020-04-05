@@ -162,27 +162,25 @@
                 </div>
               </div>
             </div>
-          </div>
-        <div>&nbsp;</div>
-          <div class="row">
+            <div class="col-md-2">
             <div id="cameradigital" class="card">
                 <div class="card-header h6">Camera Digital</div>
                 <div class="card-body">
                   <button class="dircontrol btn btn-dark" id="up-rotate" style="margin-left: 40px;">&#8593;</button>
-                  <div class="input-group mb-3">
+                  <div class="input-group">
                       <button class="dircontrol btn btn-dark" id="left-rotate">&#8592;</button>
                       <button class="dircontrol btn btn-dark" id="down-rotate">&#8595;</button>
                       <button class="dircontrol btn btn-dark" id="right-rotate">&#8594;</button>
                   </div>
               </div>
             </div>
-           <div class="col-md-2">
+            <div>&nbsp;</div>
             <div id="movementdigital" class="card">
                 <div class="card-header h6">Movement Digital</div>
                 <div class="card-body">
-                  <div class="input-group mb-3">
+                  <div class="input-group">
                       <button class="dircontrol btn btn-dark" id="up-move" style="margin-left: 40px;">&#8593;</button>
-                      <div class="input-group mb-3">
+                      <div class="input-group">
                           <button class="dircontrol btn btn-dark" id="left-move">&#8592;</button>
                           <button class="dircontrol btn btn-dark" id="down-move">&#8595;</button>
                           <button class="dircontrol btn btn-dark" id="right-move">&#8594;</button>
@@ -191,7 +189,9 @@
                 </div>
             </div>
           </div>
-            <div>&nbsp;</div>
+        </div>
+          <div>&nbsp;</div>
+            <div class="row">
             <div id="trackcontrols" class="card">
                 <div class="card-header h6">Movement</div>
                 <div class="card-body">
@@ -215,28 +215,26 @@
                 </div>
               </div>
             </div>
-        </div>
-              <div>&nbsp;</div>
-        <div class="row">
-          <div class="col-md-3">
-            <div class="card" id="pinedit">
-                <div class="card-header h6">Pin Select/GPIO/Servo</div>
-                <div class="card-body">
-                  <div class="input-group mb-3">
-                    <input class="form-control" type="text" name="select" id="select" placeholder="Pin Name">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" id="switch">On/Off</button>
+            <div class="col-md-3">
+              <div class="card" id="pinedit">
+                  <div class="card-header h6">Pin Select/GPIO/Servo</div>
+                  <div class="card-body">
+                    <div class="input-group mb-3">
+                      <input class="form-control" type="text" name="select" id="select" placeholder="Pin Name">
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" id="switch">On/Off</button>
+                      </div>
                     </div>
-                  </div>
-                  <div class="input-group mb-3">
-                    <input class="form-control" type="text" name="angle" id="angle" placeholder="Servo degrees (0-180)">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" id="rotate">Rotate</button>
+                    <div class="input-group mb-3">
+                      <input class="form-control" type="text" name="angle" id="angle" placeholder="Servo degrees (0-180)">
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" id="rotate">Rotate</button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+        <div>&nbsp;</div>
             <div class="col-md-4">
               <div id="gpio" class="card">
                   <div class="card-header h6">GPIO Switches</div>
@@ -256,7 +254,7 @@
           </div>
       <div>&nbsp;</div>
       <div id="info" class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
         <div id="config" class="card">
           <div class="card-header h6">Configuration</div>
           <div class="card-body">
