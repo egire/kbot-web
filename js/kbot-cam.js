@@ -16,14 +16,16 @@ function InitCam() {
   reload_img();
 }
 
-$("#camerastart").click(function(){
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", cam_url + "cmd_pipe.php?cmd=ru 1", true);
-    xhttp.send();
-});
+$(document).ready(function(){
+  $("#camerastart").click(function(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("GET", cam_url + "cmd_pipe.php?cmd=ru 1", true);
+      xhttp.send();
+  });
 
-$("#camerastop").click(function(){
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", cam_url + "cmd_pipe.php?cmd=ru 0", true);
-    xhttp.send();
+  $("#camerastop").click(function(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("GET", cam_url + "cmd_pipe.php?cmd=ru 0", true);
+      xhttp.send();
+  });
 });
