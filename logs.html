@@ -102,8 +102,14 @@
                 </div>
             </div> -->
 
-            <div>Update Logs: <input type="checkbox" id="updatelogs" value="logson" checked></div>
-            <div id="logs">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <div class="btn-group-prepend">
+                  <div class="input-group-text">Auto-Update Logs</div>
+                </div>
+                <label id="updateLogsLabel" class="btn btn-primary">
+                  <input type="checkbox" id="updatelogs" value="logson"> Enable
+                </label>
+            </div>
 
             </div>
         </main>
@@ -127,8 +133,6 @@
     <script type="text/javascript" src="js/kbot-ui.js"></script>
     <script type="text/javascript" src="js/kbot-func.js"></script>
     <script type="text/javascript">
-        var url = "http://th3ri5k.mynetgear.com:8000/";
-        var json;
         /*$(document).ready(function(){
 
         });

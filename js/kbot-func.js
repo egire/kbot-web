@@ -1,5 +1,4 @@
 var url = "http://th3ri5k.chickenkiller.com:8000/";
-var video = "http://th3ri5k.chickenkiller.com/video"
 
 function getCookie(name) {
     var cookie = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -53,18 +52,6 @@ $(document).ready(function(){
         query("delete", "name="+name);
     });
 
-    $("#camerastart").click(function(){
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", video + "/cmd_pipe.php?cmd=ru 1", true);
-        xhttp.send();
-    });
-
-    $("#camerastop").click(function(){
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", video + "/cmd_pipe.php?cmd=ru 0", true);
-        xhttp.send();
-    });
-
     $("#switch").click(function(){
         var name = $("#select").val();
         command("switch", "name="+name);
@@ -116,6 +103,7 @@ function command(type, data="") {
 
 function login(data="") {
     var login = new XMLHttpRequest();
+
     login.onreadystatechange = function() {
         $("#status").hide();
         if (this.status != 200) {
@@ -138,6 +126,7 @@ function login(data="") {
             }
         }
     };
+
     login.open("POST", url+"login", true);
     login.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     login.send(data);
@@ -158,6 +147,7 @@ function register(data="") {
           $("#status").show();
         }
     };
+
     register.open("POST", url+"register", true);
     register.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     register.send(data);
@@ -174,6 +164,7 @@ function log(data="") {
             $("#logs").html(this.responseText);
         }
     };
+
     log.open("POST", url+"log?"+data, true);
     log.send();
 }
