@@ -1,7 +1,6 @@
 var keyUp, keyDown, keyLeft, keyRight, keyW, keyA, keyS, keyD;
 var cam_pan = 98;
 var cam_tilt = 110;
-var video = "http://th3ri5k.chickenkiller.com/video"
 
 $(document).ready(function(){
     setInterval(function(){

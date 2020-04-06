@@ -76,7 +76,7 @@
             <h1 class="h2">Sensors</h2>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <!-- <button class="btn btn-sm btn-outline-secondary">Share</button> -->
                 <button class="btn btn-sm btn-outline-secondary">Export</button>
               </div>
               <!--
@@ -90,32 +90,32 @@
           <!--
           <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
           -->
-            <div id="camera">
-                <img id="video" src="">
-                <div id="maximize">
-                    <span style="width: 25px; height: auto; background-color: black; color: white; border: 1px solid white; position: absolute; right: 5px" data-feather="maximize-2"></span>
+          <div id="camera" class="card">
+              <div class="card-header"><span class="badge badge-pill badge-warning">Camera Head</span><span style="width: 25px; height: auto; background-color: #ffc107; color: black; border: 1px solid black; position: absolute; right: 5px" data-feather="maximize-2"></span></div>
+              <div class="card-body">
+                <img id="kbotcam" src="" style="z-index: 1000">
+                <div class="text-center">
+                  <div class="spinner-border text-warning" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
                 </div>
-            </div>
-            <div>Update Sensors: <input type="checkbox" id="updatesensors" value="sensorson"></div>
-            <button id="sweep">Sweep</button>
-		<div>
-          <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="659" height="278" style="display: block; width: 659px; height: 278px;">
+              </div>
+          </div>
 
-        </div>
+          <div>Update Sensors: <input type="checkbox" id="updatesensors" value="sensorson"></div>
+          <button id="sweep">Sweep</button>
+          <div>
+            <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="659" height="278" style="display: block; width: 659px; height: 278px;">
+          </div>
 
-       <div>
-          <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart2" width="659" height="278" style="display: block; width: 659px; height: 278px;">
-
-        </div>
-		<div>
-
-		</div>
-
-
+          <div>
+            <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart2" width="659" height="278" style="display: block; width: 659px; height: 278px;">
+          </div>
      </main>
       </div>
     </div>
-	<canvas id="canvas" style="display: block; width: 283px; height: 141px;" width="283" height="141" class="chartjs-render-monitor"></canvas>
+
+	   <canvas id="canvas" style="display: block; width: 283px; height: 141px;" width="283" height="141" class="chartjs-render-monitor"></canvas>
 
 
     <!-- Bootstrap core JavaScript
