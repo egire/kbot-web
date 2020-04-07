@@ -23,41 +23,69 @@ $(document).ready(function(){
 
     setInterval(function(){
         var movementSpeed = parseFloat($("#movespeed").val());
+        var leftFore = rightFore = leftAft = rightAft = 1;
+
         if(keyW){
-            command("move", "leftFore=-"+movementSpeed+"&leftAft=-"+movementSpeed+"&rightFore="+movementSpeed+"&rightAft="+movementSpeed);
+            leftFore -= 1;
+            leftAft -= 1;
+            rightFore += 1;
+            rightAft += 1;
         }
-        if(keyS){
-            command("move", "leftFore="+movementSpeed+"&leftAft="+movementSpeed+"&rightFore=-"+movementSpeed+"&rightAft=-"+movementSpeed);
-        }
+
         if(keyA){
-            command("move", "leftFore="+movementSpeed+"&leftAft="+movementSpeed+"&rightFore="+movementSpeed+"&rightAft="+movementSpeed);
+            leftFore += 1;
+            leftAft += 1;
+            rightFore += 1;
+            rightAft += 1;
         }
+
+        if(keyS){
+            leftFore += 1;
+            leftAft += 1;
+            rightFore -= 1;
+            rightAft -= 1
+        }
+
         if(keyD){
-            command("move", "leftFore=-"+movementSpeed+"&leftAft=-"+movementSpeed+"&rightFore=-"+movementSpeed+"&rightAft=-"+movementSpeed);
+            leftFore -= 1;
+            leftAft -= 1;
+            rightFore -= 1;
+            rightAft -= 1;
         }
+
+        leftFore = normalize(leftFore);
+        leftAft = normalize(leftAft);
+        rightFore = normalize(rightFore);
+        rightAft = normalize(rightAft);
+
+        command("move", "leftFore="+leftFore*movementSpeed+"&leftAft="+leftAft*movementSpeed+"&rightFore="+rightFore*movementSpeed+"&rightAft="+rightAft*movementSpeed);
     }, 250);
 
-    setInterval(function(){
-        if(keyUp){
-            cam_tilt += parseFloat($("#tiltspeed").val());
-            cam_tilt = clamp(cam_tilt, 50.0, 180.0);
-            command("rotate", "name=TILT&angle="+cam_tilt);
+    setInterval(function() {
+        cam_tilt_speed = parseFloat($("#tiltspeed").val());
+        cam_pan_speed = parseFloat($("#panspeed").val());
+        cam_tilt_dir = 0;
+        cam_pan_dir = 0;
+
+        if(keyUp) {
+            cam_tilt_dir += 1;
         }
-        if(keyDown){
-            cam_tilt -= parseFloat($("#tiltspeed").val());
-            cam_tilt = clamp(cam_tilt, 50.0, 180.0);
-            command("rotate", "name=TILT&angle="+cam_tilt);
+
+        if(keyDown) {
+            cam_tilt_dir += -1;
         }
-        if(keyLeft){
-            cam_pan -= parseFloat($("#panspeed").val());
-            cam_pan = clamp(cam_pan, 10.0, 180.0);
-            command("rotate", "name=PAN&angle="+cam_pan);
+
+        if(keyLeft) {
+
+            cam_pan_dir += 1;
         }
-        if(keyRight){
-            cam_pan += parseFloat($("#panspeed").val());
-            cam_pan = clamp(cam_pan, 10.0, 180.0);
-            command("rotate", "name=PAN&angle="+cam_pan);
+
+        if(keyRight) {
+            cam_pan_dir += -1;
         }
+
+        command("rotate", "name=TILT&angle="+clamp(cam_tilt_speed, 10.0, 180.0););
+        command("rotate", "name=PAN&angle="+clamp(cam_pan_speed, 10.0, 180.0));
     }, 33);
 
     $("#camera").draggable();
@@ -183,6 +211,15 @@ function clamp(value=0, min=-1.0, max=1.0) {
     if (value > max) {return max;}
     if (value < min) {return min;}
     return value;
+}
+
+function normalize(value=1) {
+    if(value == 0) return 0;
+    if(value > 0)
+      norm = value/value;
+    if (value < 0)
+      norm = (value/value) * -1;
+    return norm;
 }
 
 function centerCamera() {
