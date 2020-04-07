@@ -2,8 +2,8 @@ var keyUp, keyDown, keyLeft, keyRight, keyW, keyA, keyS, keyD;
 var cam_pan = 98;
 var cam_tilt = 110;
 
-$(document).ready(function(){
-    setInterval(function(){
+$(document).ready(function() {
+    setInterval(function() {
         if($("#updatestorage").prop("checked")) {
             query("storage");
             displayStorage();}
@@ -15,50 +15,53 @@ $(document).ready(function(){
         //$("#video").attr("src", video+"/cam_pic.php?time="+new Date().getTime());
     }, 1000);
 
-    setInterval(function(){
+    setInterval(function() {
         if($("#updatesensors").prop("checked")) {
             updateSensors();
         }
     }, 250);
 
-    setInterval(function(){
+    setInterval(function() {
         var movementSpeed = parseFloat($("#movespeed").val());
         var leftFore = rightFore = leftAft = rightAft = 0;
 
-        if(keyW){
+        if(keyW) {
             leftFore -= 1;
             leftAft -= 1;
             rightFore += 1;
             rightAft += 1;
         }
 
-        if(keyA){
+        if(keyA) {
             leftFore += 1;
             leftAft += 1;
             rightFore += 1;
             rightAft += 1;
         }
 
-        if(keyS){
+        if(keyS) {
             leftFore += 1;
             leftAft += 1;
             rightFore -= 1;
             rightAft -= 1
         }
 
-        if(keyD){
+        if(keyD) {
             leftFore -= 1;
             leftAft -= 1;
             rightFore -= 1;
             rightAft -= 1;
         }
 
-        leftFore = normalize(leftFore);
-        leftAft = normalize(leftAft);
-        rightFore = normalize(rightFore);
-        rightAft = normalize(rightAft);
+        if(keyD || keyS || keyA || keyW) {
+            leftFore = normalize(leftFore);
+            leftAft = normalize(leftAft);
+            rightFore = normalize(rightFore);
+            rightAft = normalize(rightAft);
 
-        command("move", "leftFore="+leftFore*movementSpeed+"&leftAft="+leftAft*movementSpeed+"&rightFore="+rightFore*movementSpeed+"&rightAft="+rightAft*movementSpeed);
+            command("move", "leftFore="+leftFore*movementSpeed+"&leftAft="+leftAft*movementSpeed+"&rightFore="+rightFore*movementSpeed+"&rightAft="+rightAft*movementSpeed);
+        }
+
     }, 250);
 
     setInterval(function() {
@@ -83,9 +86,13 @@ $(document).ready(function(){
             cam_pan_dir += -1;
         }
 
-        command("rotate", "name=TILT&angle="+cam_tilt_dir*clamp(cam_tilt_speed, 10.0, 180.0));
-        command("rotate", "name=PAN&angle="+cam_pan_dir*clamp(cam_pan_speed, 10.0, 180.0));
-    }, 33);
+        if(keyUp || keyDown || keyLeft || keyRight) {
+            cam_pan += cam_pan_dir*clamp(cam_pan_speed, 10.0, 180.0);
+            cam_tilt += cam_tilt_dir*clamp(cam_tilt_speed, 10.0, 180.0);
+            command("rotate", "name=PAN&angle=" + cam_pan);
+            command("rotate", "name=TILT&angle=" + cam_tilt);
+        }
+    }, 250);
 
     $("#camera").draggable();
 
