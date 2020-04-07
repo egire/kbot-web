@@ -2,8 +2,8 @@ var keyUp, keyDown, keyLeft, keyRight, keyW, keyA, keyS, keyD;
 var cam_pan = 98;
 var cam_tilt = 110;
 var movementSpeed = 0;
-var tiltSpeed = 0;
-var spanSpeed = 0;
+var cam_tilt_speed = 0;
+var cam_pan_speed = 0;
 
 $(document).ready(function() {
     setInterval(function() {
