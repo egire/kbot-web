@@ -67,7 +67,7 @@ $(document).ready(function() {
             movespeed = clamp(movementSpeed -= 0.1, 0.0, maxSpeed);
         }
 
-    }, 250);
+    }, 100);
 
     setInterval(function() {
         cam_tilt_speed = parseFloat($("#tiltspeed").val());
@@ -80,15 +80,15 @@ $(document).ready(function() {
         }
 
         if(keyDown) {
-            cam_tilt_dir += -1;
+            cam_tilt_dir -= 1;
         }
 
         if(keyLeft) {
-            cam_pan_dir += 1;
+            cam_pan_dir -= 1;
         }
 
         if(keyRight) {
-            cam_pan_dir += -1;
+            cam_pan_dir += 1;
         }
 
         if(keyUp || keyDown || keyLeft || keyRight) {
@@ -97,7 +97,7 @@ $(document).ready(function() {
             command("rotate", "name=PAN&angle=" + cam_pan);
             command("rotate", "name=TILT&angle=" + cam_tilt);
         }
-    }, 250);
+    }, 100);
 
     $("#camera").draggable();
 
