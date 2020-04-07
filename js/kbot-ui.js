@@ -84,7 +84,7 @@ $(document).ready(function(){
             cam_pan_dir += -1;
         }
 
-        command("rotate", "name=TILT&angle="+clamp(cam_tilt_speed, 10.0, 180.0););
+        command("rotate", "name=TILT&angle="+clamp(cam_tilt_speed, 10.0, 180.0));
         command("rotate", "name=PAN&angle="+clamp(cam_pan_speed, 10.0, 180.0));
     }, 33);
 
