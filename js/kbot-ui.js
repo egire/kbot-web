@@ -1,6 +1,7 @@
 var keyUp, keyDown, keyLeft, keyRight, keyW, keyA, keyS, keyD;
 var cam_pan = 98;
 var cam_tilt = 110;
+var movementSpeed = 0;
 
 $(document).ready(function() {
     setInterval(function() {
@@ -22,8 +23,8 @@ $(document).ready(function() {
     }, 250);
 
     setInterval(function() {
-        var movementSpeed = parseFloat($("#movespeed").val());
         var leftFore = rightFore = leftAft = rightAft = 0;
+        var maxSpeed = parseFloat($("#movespeed").val());
 
         if(keyW) {
             leftFore -= 1;
@@ -59,7 +60,11 @@ $(document).ready(function() {
             rightFore = normalize(rightFore);
             rightAft = normalize(rightAft);
 
+            movementSpeed = clamp(movementSpeed += 0.1, 0.0, maxSpeed);
+
             command("move", "leftFore="+leftFore*movementSpeed+"&leftAft="+leftAft*movementSpeed+"&rightFore="+rightFore*movementSpeed+"&rightAft="+rightAft*movementSpeed);
+        } else {
+            movespeed = clamp(movementSpeed -= 0.1, 0.0, maxSpeed);
         }
 
     }, 250);
@@ -87,8 +92,8 @@ $(document).ready(function() {
         }
 
         if(keyUp || keyDown || keyLeft || keyRight) {
-            cam_pan += cam_pan_dir*clamp(cam_pan_speed, 10.0, 180.0);
-            cam_tilt += cam_tilt_dir*clamp(cam_tilt_speed, 10.0, 180.0);
+            cam_pan = clamp(cam_pan_dir*cam_pan_speed+cam_pan, 10.0, 180.0);
+            cam_tilt = clamp(cam_tilt_dir*cam_tilt_speed+cam_tilt, 10.0, 180.0);
             command("rotate", "name=PAN&angle=" + cam_pan);
             command("rotate", "name=TILT&angle=" + cam_tilt);
         }
