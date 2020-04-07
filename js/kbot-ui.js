@@ -69,7 +69,7 @@ $(document).ready(function() {
             movespeed = clamp(movementSpeed -= 0.1, 0.0, maxSpeed);
         }
 
-    }, 50);
+    }, 100);
 
     setInterval(function() {
         var cam_tilt_speed_max = parseFloat($("#tiltspeed").val());
@@ -105,7 +105,7 @@ $(document).ready(function() {
             cam_pan_speed = clamp(cam_pan_speed -= 0.1, 0.0, cam_pan_speed_max);
             cam_tilt_speed = clamp(cam_tilt_speed -= 0.1, 0.0, cam_tilt_speed_max);
         }
-    }, 50);
+    }, 100);
 
     $("#camera").draggable();
 
