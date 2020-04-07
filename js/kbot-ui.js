@@ -23,7 +23,7 @@ $(document).ready(function(){
 
     setInterval(function(){
         var movementSpeed = parseFloat($("#movespeed").val());
-        var leftFore = rightFore = leftAft = rightAft = 1;
+        var leftFore = rightFore = leftAft = rightAft = 0;
 
         if(keyW){
             leftFore -= 1;
@@ -76,7 +76,6 @@ $(document).ready(function(){
         }
 
         if(keyLeft) {
-
             cam_pan_dir += 1;
         }
 
@@ -84,8 +83,8 @@ $(document).ready(function(){
             cam_pan_dir += -1;
         }
 
-        command("rotate", "name=TILT&angle="+clamp(cam_tilt_speed, 10.0, 180.0));
-        command("rotate", "name=PAN&angle="+clamp(cam_pan_speed, 10.0, 180.0));
+        command("rotate", "name=TILT&angle="+cam_tilt_dir*clamp(cam_tilt_speed, 10.0, 180.0));
+        command("rotate", "name=PAN&angle="+cam_pan_dir*clamp(cam_pan_speed, 10.0, 180.0));
     }, 33);
 
     $("#camera").draggable();
