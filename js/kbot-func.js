@@ -1,4 +1,4 @@
-var url = "http://th3ri5k.chickenkiller.com:8000/";
+var url = "https://th3ri5k.chickenkiller.com:8000/";
 
 function getCookie(name) {
     var cookie = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));

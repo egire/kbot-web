@@ -66,7 +66,7 @@ $(document).ready(function() {
 
             command("move", "leftFore="+leftFore*movementSpeed+"&leftAft="+leftAft*movementSpeed+"&rightFore="+rightFore*movementSpeed+"&rightAft="+rightAft*movementSpeed);
         } else {
-            movespeed = clamp(movementSpeed -= 0.1, 0.0, maxSpeed);
+            movespeed = clamp(movementSpeed -= 0.5, 0.0, maxSpeed);
         }
 
     }, 100);
@@ -102,8 +102,8 @@ $(document).ready(function() {
             command("rotate", "name=PAN&angle=" + cam_pan);
             command("rotate", "name=TILT&angle=" + cam_tilt);
         } else {
-            cam_pan_speed = clamp(cam_pan_speed -= 0.1, 0.0, cam_pan_speed_max);
-            cam_tilt_speed = clamp(cam_tilt_speed -= 0.1, 0.0, cam_tilt_speed_max);
+            cam_pan_speed = clamp(cam_pan_speed -= 0.5, 0.0, cam_pan_speed_max);
+            cam_tilt_speed = clamp(cam_tilt_speed -= 0.5, 0.0, cam_tilt_speed_max);
         }
     }, 100);
 
