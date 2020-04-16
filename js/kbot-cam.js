@@ -1,5 +1,5 @@
 var mjpeg_img;
-var cam_url = "http://th3ri5k.chickenkiller.com/video/"
+var cam_url = "http://th3ri5k.chickenkiller.com/cam/"
 
 function reload_img () {
   mjpeg_img.src = cam_url + "cam_pic.php?time=" + new Date().getTime();
