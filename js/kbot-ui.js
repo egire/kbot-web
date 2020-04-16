@@ -110,10 +110,10 @@ $(document).ready(function() {
     $("#camera").draggable();
 
     $("#maximize").click(function (){
-        if ($("#camera").css("width") == "512px") {
-            $("#camera").attr("style", "width: 768px;");
+        if ($("#camera").css("width") != "512px") {
+            $("#camera").attr("style", "width: 512px;");
         } else {
-        $("#camera").attr("style", "width: 512px;");
+            $("#camera").attr("style", "width: 768px;");
     });
 
     $("#sweep").click(function (){
