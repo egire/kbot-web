@@ -29,10 +29,10 @@ $(document).ready(function() {
         var maxSpeed = parseFloat($("#movespeed").val());
 
         if(keyW) {
-            leftFore -= 1;
-            leftAft -= 1;
-            rightFore += 1;
-            rightAft += 1;
+            leftFore += 1;
+            leftAft += 1;
+            rightFore -= 1;
+            rightAft -= 1
         }
 
         if(keyA) {
@@ -43,10 +43,10 @@ $(document).ready(function() {
         }
 
         if(keyS) {
-            leftFore += 1;
-            leftAft += 1;
-            rightFore -= 1;
-            rightAft -= 1
+            leftFore -= 1;
+            leftAft -= 1;
+            rightFore += 1;
+            rightAft += 1;
         }
 
         if(keyD) {
