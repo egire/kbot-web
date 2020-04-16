@@ -110,10 +110,10 @@ $(document).ready(function() {
     $("#camera").draggable();
 
     $("#maximize").click(function (){
-        if ($("#kbotcam").css("width") == "100%") {
-            $("#kbotcam").attr("style", "width: 100%;");
+        if ($("#camera").css("width") == "512px") {
+            $("#camera").attr("style", "width: 768px;");
         } else {
-        $("#kbotcam").attr("style", "width: 200%;");}
+        $("#camera").attr("style", "width: 512px;");
     });
 
     $("#sweep").click(function (){
