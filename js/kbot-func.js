@@ -14,7 +14,7 @@ $(document).ready(function(){
         var username = $("#username").val();
         var password = $("#password").val();
         login("username="+username+"&password="+password);
-        
+
     });
 
     $("#logout").click(function(){
@@ -29,7 +29,6 @@ $(document).ready(function(){
         var email = $("#email").val();
         register("username="+username+"&email="+email+"&password="+password);
         event.preventDefault();
-        window.location = "./";
     });
 
     $("#save").click(function(){
