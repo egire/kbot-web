@@ -140,7 +140,7 @@ function register(data="") {
             $("#status").html(this.responseText);
             $("#status").show();
 
-            window.location = "./";
+            //window.location = "./";
         } else {
           $("#status").html("Registration failed.");
 
