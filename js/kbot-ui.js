@@ -170,23 +170,23 @@ $(document).keyup(function(key) {
     if($("#enableWASD").prop("checked")) {
         switch(key.which) {
             case 65: // left
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 keyA = false;
+                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 break;
             case 87: // up
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 keyW = false;
+                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 break;
             case 68: // right
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 keyD = false;
+                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 break;
             case 83: // down
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 keyS = false;
+                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 break;
         }
-        key.preventDefault(); // prevent default action (scroll / move caret)
+        key.preventDefault();
     }
 });
 
