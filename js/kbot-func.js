@@ -14,6 +14,7 @@ $(document).ready(function(){
         var username = $("#username").val();
         var password = $("#password").val();
         login("username="+username+"&password="+password);
+        
     });
 
     $("#logout").click(function(){
