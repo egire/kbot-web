@@ -114,6 +114,7 @@ $(document).ready(function() {
             $("#camera").attr("style", "width: 512px;");
         } else {
             $("#camera").attr("style", "width: 768px;");
+        }
     });
 
     $("#sweep").click(function (){
