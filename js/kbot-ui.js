@@ -66,7 +66,7 @@ $(document).ready(function() {
 
             command("move", "leftFore="+leftFore*movementSpeed+"&leftAft="+leftAft*movementSpeed+"&rightFore="+rightFore*movementSpeed+"&rightAft="+rightAft*movementSpeed);
         } else {
-            movespeed = clamp(movementSpeed -= 0.5, 0.0, maxSpeed);
+            movementSpeed = clamp(movementSpeed -= 0.5, 0.0, maxSpeed);            
         }
 
     }, 100);
