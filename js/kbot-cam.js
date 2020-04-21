@@ -1,19 +1,9 @@
 var mjpeg_img;
-var cam_url = "http://th3ri5k.chickenkiller.com/cam/"
 
-function reload_img () {
-  mjpeg_img.src = cam_url + "cam_pic.php?time=" + new Date().getTime();
-}
-
-function error_img () {
-  setTimeout("mjpeg_img.src = cam_url + 'cam_pic.php?time=' + new Date().getTime();", 100);
-}
-
-function InitCam() {
-  mjpeg_img = document.getElementById("kbotcam");
-  mjpeg_img.onload = reload_img;
-  mjpeg_img.onerror = error_img;
-  reload_img();
+$(document).ready(function() {
+  setInterval(function() {
+      cam("cam");
+  }, 1000);
 }
 
 $(document).ready(function(){
@@ -29,3 +19,20 @@ $(document).ready(function(){
       xhttp.send();
   });
 });
+
+function cam(name="") {
+    var log = new XMLHttpRequest();
+    var token = getCookie("token");
+    var username = getCookie("username");
+
+    var data = "username=" + username + "&token=" + token + "&name=" + name;
+    log.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var cam = document.getElementById("kbotcam");
+            cam.src = this.responseText;
+        }
+    };
+
+    log.open("POST", url+"cam?"+data, true);
+    log.send();
+}
