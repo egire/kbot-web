@@ -1,7 +1,7 @@
 $(document).ready(function() {
   setInterval(function() {
       cam("cam");
-  }, 1000);
+  }, 100);
 });
 
 $(document).ready(function(){
