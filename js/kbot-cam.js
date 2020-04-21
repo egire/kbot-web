@@ -1,10 +1,8 @@
-var mjpeg_img;
-
 $(document).ready(function() {
   setInterval(function() {
       cam("cam");
   }, 1000);
-}
+});
 
 $(document).ready(function(){
   $("#camerastart").click(function(){
