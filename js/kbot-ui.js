@@ -298,7 +298,7 @@ function updateSwitches(id) {
     $("#"+id).html("");
     $.each(storage, function(i, pin) {
         if(pin.type == "GPIO" && pin.mode == "OUT") {
-            $("#"+id).append('<button class="btn btn-default" onclick="query(\'switch\',\'name='+pin.name+'\');">'+pin.name+'</button><br>');}
+            $("#"+id).append('<button class="btn btn-primary" onclick="query(\'switch\',\'name='+pin.name+'\');">'+pin.name+'</button><br>');}
         else if (pin.type == "IC2") {
             //$("#buttons").append('<input onchage="rotate('$(this).attr('value'))" placeholder="'+pin.name+'" id="'+pin.name+'">');
             //$("#buttons").append('<button onclick="query(\'rotate\', name=\''+pin.name+'\' angle=\'$("#'+pin.name+'").val();\'>Rotate</button><br>');
