@@ -110,8 +110,17 @@
               </div>
           </div>
 
-          <div>Update Sensors: <input type="checkbox" id="updatesensors" value="sensorson"></div>
-          <button id="sweep">Sweep</button>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <div class="btn-group-prepend">
+                <div class="input-group-text">Update Sensors</div>
+              </div>
+              <label id="updateswitchesLabel" class="btn btn-primary">
+                <input type="checkbox" id="updatesensors" name="updateswitches" value="sensorson"> Enable
+              </label>
+          </div>
+
+          <button class="btn button-primary" id="sweep">Sweep</button>
+
           <div>
             <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="659" height="278" style="display: block; width: 659px; height: 278px;">
           </div>
