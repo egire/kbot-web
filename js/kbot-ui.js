@@ -275,19 +275,20 @@ function displayStorage() {
 function updateSensors() {
     query("sensor", "name=PING");
     //query("sensor", "name=LENCODER");
-    if (!storage) { return; }
-    /*scatterChart.data.datasets.forEach((dataset) => {
-       dataset.data.push(storage);
-    });
-    scatterChart.update();
-    */
+    if (storage) {
+      /*scatterChart.data.datasets.forEach((dataset) => {
+         dataset.data.push(storage);
+      });
+      scatterChart.update();
+      */
 
-    myChart.data.labels.push(storage["x"]);
-    myChart.data.datasets.forEach((dataset) => {
-        dataset.data.push(storage);
-    });
-    myChart.update();
-    storage = false;
+      myChart.data.labels.push(storage["x"]);
+      myChart.data.datasets.forEach((dataset) => {
+          dataset.data.push(storage);
+      });
+      myChart.update();
+      storage = null;
+    }
 }
 
 function displayLog() {

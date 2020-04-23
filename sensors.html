@@ -95,11 +95,11 @@
           <!--
           <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
           -->
-          <div id="camera" class="card">
+          <div id="camera" class="card" style="width: 512px;">
               <img id="kbotcam" style="position: absolute; width: inherit;" src="">
               <div class="card-header" style="z-index: 100;">
                 <span class="badge badge-pill badge-warning" style="z-index: 10;">Camera Head</span>
-                <span style="width: 25px; height: auto; background-color: #ffc107; color: black; border: 1px solid black; position: absolute; right: 5px" data-feather="maximize-2"></span>
+                <span id="maximize" style="width: 25px; height: auto; background-color: #ffc107; color: black; border: 1px solid black; position: absolute; right: 5px; top: 5px;" data-feather="maximize-2"></span>
               </div>
               <div class="card-body">
                 <div class="text-center">
@@ -114,7 +114,7 @@
               <div class="btn-group-prepend">
                 <div class="input-group-text">Update Sensors</div>
               </div>
-              <label id="updateswitchesLabel" class="btn btn-primary">
+              <label id="updatesensorsLabel" class="btn btn-primary">
                 <input type="checkbox" id="updatesensors" name="updatesensors" value="sensorson"> Enable
               </label>
           </div>
@@ -162,7 +162,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script>
-      var storage;
+      var storage = null;
       command("load");
     /*
       var ctx = document.getElementById("myChart");
