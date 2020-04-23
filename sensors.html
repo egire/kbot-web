@@ -115,11 +115,11 @@
                 <div class="input-group-text">Update Sensors</div>
               </div>
               <label id="updateswitchesLabel" class="btn btn-primary">
-                <input type="checkbox" id="updatesensors" name="updateswitches" value="sensorson"> Enable
+                <input type="checkbox" id="updatesensors" name="updatesensors" value="sensorson"> Enable
               </label>
           </div>
 
-          <button class="btn button-primary" id="sweep">Sweep</button>
+          <button class="btn btn-light" id="sweep">Sweep</button>
 
           <div>
             <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="659" height="278" style="display: block; width: 659px; height: 278px;">
@@ -162,7 +162,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script>
-      var json;
+      var storage;
       command("load");
     /*
       var ctx = document.getElementById("myChart");
