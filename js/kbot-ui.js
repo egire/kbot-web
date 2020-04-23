@@ -273,7 +273,7 @@ function displayStorage() {
 }
 
 function updateSensors() {
-    query("sensor", "name=PING");
+    query("sensor", "name=ULTRASWEEP");
     //query("sensor", "name=LENCODER");
     if (storage) {
       /*scatterChart.data.datasets.forEach((dataset) => {
