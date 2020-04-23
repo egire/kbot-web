@@ -163,6 +163,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script>
       var storage = null;
+      var json;
       command("load");
     /*
       var ctx = document.getElementById("myChart");
@@ -199,7 +200,7 @@
             data: {
               datasets: [{
                 label: 'Ultrasonic Distance',
-                data: json,
+                data: null,
                 lineTension: 0,
                 backgroundColor: 'transparent',
                 borderColor: '#007bff',
