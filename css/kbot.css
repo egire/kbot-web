@@ -1,4 +1,4 @@
-#camera {z-index: 100; position: fixed; bottom: 100px; right: 100px; background-color: blue; border: 1px solid grey;}
+#camera {z-index: 100; width: 512px; height: 384px; position: fixed; bottom: 394px; right: 522px; background-color: blue; border: 1px solid grey;}
 #video {width: inherit;}
 #maximize {position: relative; bottom: 30px; width: inherit;}
 
