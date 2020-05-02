@@ -4,6 +4,8 @@ var cam_tilt = 110;
 var movementSpeed = 0;
 var cam_tilt_speed = 0;
 var cam_pan_speed = 0;
+var cam_viewport_x = $("#camera").css("right");
+var cam_viewport_y = $("#camera").css("bottom");
 
 $(document).ready(function() {
     setInterval(function() {
@@ -111,9 +113,11 @@ $(document).ready(function() {
 
     $("#maximize").click(function (){
         if ($("#camera").css("width") != "512px") {
-            $("#camera").attr("style", "width: 512px;");
+            $("#camera").css("width", "512px");
+            $("#camera").css("height", "384px");
         } else {
-            $("#camera").attr("style", "width: 768px;");
+            $("#camera").css("width", "768px");
+            $("#camera").css("height", "576px");
         }
     });
 
