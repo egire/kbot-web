@@ -119,14 +119,16 @@
               </label>
           </div>
 
-          <button class="btn btn-light" id="sweep">Sweep</button>
+          <button class="btn btn-primary" id="sweep">Sweep</button>
 
           <div>
-            <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="659" height="278" style="display: block; width: 659px; height: 278px;">
+            <canvas class="my-4 w-100 chartjs-render-monitor" id="chartUltrasonic" width="659" height="278" style="display: block; width: 659px; height: 278px;">
           </div>
 
+          <button class="btn btn-primary" id="ads">ADS 2</button>
+
           <div>
-            <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart2" width="659" height="278" style="display: block; width: 659px; height: 278px;">
+            <canvas class="my-4 w-100 chartjs-render-monitor" id="chartAds" width="659" height="278" style="display: block; width: 659px; height: 278px;">
           </div>
      </main>
       </div>
@@ -165,41 +167,40 @@
       var storage = null;
       var json;
       command("load");
-    /*
-      var ctx = document.getElementById("myChart");
-      var scatterChart = new Chart(ctx, {
-            type: 'scatter',
-            data: {
-                datasets: [{
-                    label: 'Scatter Dataset',
-                    data: [{
-                        x: -10,
-                        y: 0
-                    }, {
-                        x: 0,
-                        y: 10
-                    }, {
-                        x: 10,
-                        y: 5
-                    }]
-                }]
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                        type: 'linear',
-                        position: 'bottom'
-                    }]
-                }
-            }
-        });
-      */
-      var ctx = document.getElementById("myChart");
+      // var ctx = document.getElementById("myChart2");
+      // var scatterChart = new Chart(ctx, {
+      //       type: 'scatter',
+      //       data: {
+      //           datasets: [{
+      //               label: 'ADS Channel #2',
+      //               data: [{
+      //                   x: -10,
+      //                   y: 0
+      //               }, {
+      //                   x: 0,
+      //                   y: 10
+      //               }, {
+      //                   x: 10,
+      //                   y: 5
+      //               }]
+      //           }]
+      //       },
+      //       options: {
+      //           scales: {
+      //               xAxes: [{
+      //                   type: 'linear',
+      //                   position: 'bottom'
+      //               }]
+      //           }
+      //       }
+      // });
+
+      var ctx = document.getElementById("chartUltrasonic");
       var myChart = new Chart(ctx, {
             type: 'line',
             data: {
               datasets: [{
-                label: 'Ultrasonic Distance',
+                label: 'Ultrasonic Distance (cm)',
                 data: null,
                 lineTension: 0,
                 backgroundColor: 'transparent',
@@ -227,13 +228,13 @@
               }
             }
           });
-        /*
-        var ctx2 = document.getElementById("myChart2");
+
+        var ctx2 = document.getElementById("chartAds");
         var myChart2 = new Chart(ctx2, {
             type: 'line',
             data: {
               datasets: [{
-                label: 'Encoder State',
+                label: 'ADS',
                 data: json,
                 lineTension: 0,
                 backgroundColor: 'transparent',
@@ -260,7 +261,7 @@
                 display: true,
               }
             }
-          });*/
+          });
     </script>
 
   </body>

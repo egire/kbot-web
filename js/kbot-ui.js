@@ -124,6 +124,10 @@ $(document).ready(function() {
     $("#sweep").click(function (){
         query("sweep");
     });
+
+    $("#ads").click(function (){
+        query("ads");
+    });
 });
 
 $(document).keyup(function(key) {
