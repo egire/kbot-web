@@ -1,4 +1,5 @@
 var url = "https://th3ri5k.chickenkiller.com:8000/";
+var storage = {};
 
 function getCookie(name) {
     var cookie = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
