@@ -16,16 +16,23 @@ $(document).ready(function() {
             updateSwitches("switches");}
         if($("#updatelogs").prop("checked")) {
             log("tail=False&maxlines=50");}
-
-        //$("#video").attr("src", video+"/cam_pic.php?time="+new Date().getTime());
     }, 1000);
 
     setInterval(function() {
-        if($("#updatesensors").prop("checked")) {
-            updateSensors();
+        if($("#updateir").prop("checked")) {
+            updateir();
         }
-        if($("#updateads").prop("checked")) {
-            updateAds();
+        if($("#updateultrasonic").prop("checked")) {
+            updateultrasonic();
+        }
+        if($("#updatepower").prop("checked")) {
+            updatepower();
+        }
+        if($("#updatebattery").prop("checked")) {
+            updatebattery();
+        }
+        if($("#updateencoders").prop("checked")) {
+            updateencoders();
         }
     }, 250);
 
@@ -222,22 +229,6 @@ $(document).keydown(function(key) {
     }
 });
 
-function getCamImage(element) {
-    $.ajax({
-      type: "GET",
-      url: video+"/cam_pic.php?time="+new Date().getTime(),
-      dataType: "image/jpg",
-      success: function(img) {
-        i = new Image();
-        i.src = img;
-        $(element).text(i);
-      },
-      error: function(error, txtStatus) {
-        return false;
-      }
-    });
-}
-
 function clamp(value=0, min=-1.0, max=1.0) {
     if (value > max) {return max;}
     if (value < min) {return min;}
@@ -283,41 +274,80 @@ function displayStorage() {
     $("#storage").html(display);
 }
 
-function updateSensors() {
-    query("sensor", "name=ULTRASWEEP");
+function updateultrasonic() {
+    query("sensor", "ULTRASWEEP");
     //query("sensor", "name=LENCODER");
-    if (storage) {
-      /*scatterChart.data.datasets.forEach((dataset) => {
-         dataset.data.push(storage);
-      });
-      scatterChart.update();
-      */
+    if (storage["sensor"]["ULTRASWEEP"]) {
 
-      chartUltrasonic.data.labels.push(storage["x"]);
-      chartUltrasonic.data.datasets.forEach((dataset) => {
-          dataset.data.push(storage);
+      distanceChart.data.labels.push(storage["sensor"]["ULTRASWEEP"]["x"]);
+      distanceChart.data.datasets.forEach((dataset) => {
+          dataset.data.push(storage["sensor"]["ULTRASWEEP"]);
       });
-      chartUltrasonic.update();
-      storage = null;
+      distanceChart.update();
     }
 }
 
-function updateAds() {
-    query("ads");
-    //query("sensor", "name=LENCODER");
-    if (storage) {
-      /*scatterChart.data.datasets.forEach((dataset) => {
-         dataset.data.push(storage);
-      });
-      scatterChart.update();
-      */
+function updateencoders() {
+    query("sensor", "LENCODER");
+    query("sensor", "RENCODER");
 
-      chartAds.data.labels.push(storage["x"]);
-      chartAds.data.datasets.forEach((dataset) => {
-          dataset.data.push(storage);
+    if (storage["sensor"]["LENCODER"]) {
+
+      encoderChart.data.labels.push(storage["sensor"]["LENCODER"]["x"]);
+      encoderChart.data.datasets.forEach((dataset) => {
+          dataset.data.push(storage["sensor"]["LENCODER"]);
       });
-      chartAds.update();
-      storage = null;
+
+      encoderChart.update();
+    }
+
+    if (storage["sensor"]["RENCODER"]) {
+
+      encoderChart.data.labels.push(storage["sensor"]["RENCODER"]["x"]);
+      encoderChart.data.datasets.forEach((dataset) => {
+          dataset.data.push(storage["sensor"]["RENCODER"]);
+      });
+
+      encoderChart.update();
+    }
+}
+
+function updateir() {
+    query("ir");
+
+    if (storage["ir"]) {
+      distanceChart.data.labels.push(storage["ir"]["x"]);
+      distanceChart.data.datasets.forEach((dataset) => {
+          dataset.data.push(storage["ir"]);
+      });
+
+      distanceChart.update();
+    }
+}
+
+function updatepower() {
+    query("power");
+
+    if (storage["power"]) {
+      energyChart.data.labels.push(storage["power"]["x"]);
+      energyChart.data.datasets.forEach((dataset) => {
+          dataset.data.push(storage["power"]);
+      });
+
+      powerChart.update();
+    }
+}
+
+function updatebattery() {
+    query("battery");
+
+    if (storage["battery"]) {
+      energyChart.data.labels.push(storage["battery"]["x"]);
+      energyChart.data.datasets.forEach((dataset) => {
+          dataset.data.push(storage["battery"]);
+      });
+
+      powerChart.update();
     }
 }
 

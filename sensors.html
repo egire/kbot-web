@@ -112,30 +112,58 @@
 
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
               <div class="btn-group-prepend">
-                <div class="input-group-text">Update Sensors</div>
+                <div class="input-group-text">Update Ultrasonic Distance</div>
               </div>
-              <label id="updatesensorsLabel" class="btn btn-primary">
-                <input type="checkbox" id="updatesensors" name="updatesensors" value="sensorson"> Enable
+              <label id="updateupdateultrasonicLabel" class="btn btn-primary">
+                <input type="checkbox" id="updateultrasonic" name="updateultrasonic"> Enable
+              </label>
+          </div>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <div class="btn-group-prepend">
+                <div class="input-group-text">Update IR Distance</div>
+              </div>
+              <label id="updateirLabel" class="btn btn-primary">
+                <input type="checkbox" id="updateir" name="updateir"> Enable
               </label>
           </div>
 
-          <button class="btn btn-primary" id="sweep">Sweep</button>
-
           <div>
-            <canvas class="my-4 w-100 chartjs-render-monitor" id="chartUltrasonic" width="659" height="278" style="display: block; width: 659px; height: 278px;">
+            <canvas class="my-4 w-100 chartjs-render-monitor" id="distanceChart" width="659" height="278" style="display: block; width: 659px; height: 278px;">
           </div>
 
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
               <div class="btn-group-prepend">
-                <div class="input-group-text">Update ADS 2</div>
+                <div class="input-group-text">Update Encoders</div>
               </div>
-              <label id="updateadsLabel" class="btn btn-primary">
-                <input type="checkbox" id="updateads" name="updateads" value="adson"> Enable
+              <label id="updateencodersLabel" class="btn btn-primary">
+                <input type="checkbox" id="updateencoders" name="updateencoders"> Enable
               </label>
           </div>
 
           <div>
-            <canvas class="my-4 w-100 chartjs-render-monitor" id="chartAds" width="659" height="278" style="display: block; width: 659px; height: 278px;">
+            <canvas class="my-4 w-100 chartjs-render-monitor" id="encoderChart" width="659" height="278" style="display: block; width: 659px; height: 278px;">
+          </div>
+
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <div class="btn-group-prepend">
+                <div class="input-group-text">Update Battery</div>
+              </div>
+              <label id="updatebatteryLabel" class="btn btn-primary">
+                <input type="checkbox" id="updatebattery" name="updatebattery"> Enable
+              </label>
+          </div>
+          
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <div class="btn-group-prepend">
+                <div class="input-group-text">Update Power</div>
+              </div>
+              <label id="updatepowerLabel" class="btn btn-primary">
+                <input type="checkbox" id="updatepower" name="updatepower"> Enable
+              </label>
+          </div>
+
+          <div>
+            <canvas class="my-4 w-100 chartjs-render-monitor" id="energyChart" width="659" height="278" style="display: block; width: 659px; height: 278px;">
           </div>
      </main>
       </div>
@@ -174,36 +202,9 @@
       var storage = null;
       var json;
       command("load");
-      // var ctx = document.getElementById("myChart2");
-      // var scatterChart = new Chart(ctx, {
-      //       type: 'scatter',
-      //       data: {
-      //           datasets: [{
-      //               label: 'ADS Channel #2',
-      //               data: [{
-      //                   x: -10,
-      //                   y: 0
-      //               }, {
-      //                   x: 0,
-      //                   y: 10
-      //               }, {
-      //                   x: 10,
-      //                   y: 5
-      //               }]
-      //           }]
-      //       },
-      //       options: {
-      //           scales: {
-      //               xAxes: [{
-      //                   type: 'linear',
-      //                   position: 'bottom'
-      //               }]
-      //           }
-      //       }
-      // });
 
-      var ctx = document.getElementById("chartUltrasonic");
-      var chartUltrasonic = new Chart(ctx, {
+      var ctx = document.getElementById("distanceChart");
+      var distanceChart = new Chart(ctx, {
             type: 'line',
             data: {
               datasets: [{
@@ -211,43 +212,17 @@
                 data: null,
                 lineTension: 0,
                 backgroundColor: 'transparent',
-                borderColor: '#007bff',
+                borderColor: '#0000ff',
                 borderWidth: 1,
-                pointBackgroundColor: '#007bff'
-              }]
-            },
-            options: {
-              responsive: true,
-              title: {
-                  display: true
-              },
-              scales: {
-                yAxes: [{
-                  ticks: {
-                    beginAtZero: false,
-                    suggestedMin: 0.02,
-                    suggestedMax: 3
-                  }
-                }]
-              },
-              legend: {
-                display: true,
-              }
-            }
-          });
-
-        var ctx2 = document.getElementById("chartAds");
-        var chartAds = new Chart(ctx2, {
-            type: 'line',
-            data: {
-              datasets: [{
-                label: 'ADS Distance (cm)',
-                data: json,
+                pointBackgroundColor: '#0000ff'
+              }, {
+                label: 'IR Distance (cm)',
+                data: null,
                 lineTension: 0,
                 backgroundColor: 'transparent',
-                borderColor: '#007bff',
+                borderColor: '#00ff00',
                 borderWidth: 1,
-                pointBackgroundColor: '#007bff'
+                pointBackgroundColor: '#00ff00'
               }]
             },
             options: {
@@ -268,7 +243,91 @@
                 display: true,
               }
             }
+        });
+        var ctx = document.getElementById("encoderChart");
+        var distanceChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                datasets: [{
+                  label: 'Left Encoder',
+                  data: null,
+                  lineTension: 0,
+                  backgroundColor: 'transparent',
+                  borderColor: '#0000ff',
+                  borderWidth: 1,
+                  pointBackgroundColor: '#0000ff'
+                }, {
+                  label: 'Right Encoder',
+                  data: null,
+                  lineTension: 0,
+                  backgroundColor: 'transparent',
+                  borderColor: '#00ff00',
+                  borderWidth: 1,
+                  pointBackgroundColor: '#00ff00'
+                }]
+              },
+              options: {
+                responsive: true,
+                title: {
+                    display: true
+                },
+                scales: {
+                  yAxes: [{
+                    ticks: {
+                      beginAtZero: false,
+                      suggestedMin: 0.02,
+                      suggestedMax: 3
+                    }
+                  }]
+                },
+                legend: {
+                  display: true,
+                }
+              }
           });
+          var ctx = document.getElementById("energyChart");
+          var distanceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                  datasets: [{
+                    label: 'Battery Capacity (%)',
+                    data: null,
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: '#0000ff',
+                    borderWidth: 1,
+                    pointBackgroundColor: '#0000ff'
+                  }, {
+                    label: 'Power (voltage)',
+                    data: null,
+                    lineTension: 0,
+                    backgroundColor: 'transparent',
+                    borderColor: '#00ff00',
+                    borderWidth: 1,
+                    pointBackgroundColor: '#00ff00'
+                  }]
+                },
+                options: {
+                  responsive: true,
+                  title: {
+                      display: true
+                  },
+                  scales: {
+                    yAxes: [{
+                      ticks: {
+                        beginAtZero: false,
+                        suggestedMin: 0.02,
+                        suggestedMax: 3
+                      }
+                    }]
+                  },
+                  legend: {
+                    display: true,
+                  }
+                }
+            });
+
+
     </script>
 
   </body>

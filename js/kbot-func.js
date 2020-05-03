@@ -65,15 +65,19 @@ $(document).ready(function(){
 
 });
 
-function query(type, data="") {
+function query(type, name="", data="") {
     var xhttp = new XMLHttpRequest();
     var token = getCookie("token");
     var username = getCookie("username");
 
-    data = "username=" + username + "&token=" + token + "&" + data;
+    data = "username=" + username + "&token=" + token + "&name=" + name + "&" + data;
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            storage = JSON.parse(this.responseText);
+            if(name == "") {
+              storage["type"] = JSON.parse(this.responseText);
+            } else {
+              storage["type"][name] = JSON.parse(this.responseText);
+            }
         } else if (this.readyState != 4 && this.status == 200) {
             xhttp = new XMLHttpRequest();
         }
