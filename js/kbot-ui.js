@@ -24,6 +24,9 @@ $(document).ready(function() {
         if($("#updatesensors").prop("checked")) {
             updateSensors();
         }
+        if($("#updateads").prop("checked")) {
+            updateAds();
+        }
     }, 250);
 
     setInterval(function() {
@@ -290,11 +293,30 @@ function updateSensors() {
       scatterChart.update();
       */
 
-      myChart.data.labels.push(storage["x"]);
-      myChart.data.datasets.forEach((dataset) => {
+      chartUltrasonic.data.labels.push(storage["x"]);
+      chartUltrasonic.data.datasets.forEach((dataset) => {
           dataset.data.push(storage);
       });
-      myChart.update();
+      chartUltrasonic.update();
+      storage = null;
+    }
+}
+
+function updateAds() {
+    query("ads");
+    //query("sensor", "name=LENCODER");
+    if (storage) {
+      /*scatterChart.data.datasets.forEach((dataset) => {
+         dataset.data.push(storage);
+      });
+      scatterChart.update();
+      */
+
+      chartAds.data.labels.push(storage["x"]);
+      chartAds.data.datasets.forEach((dataset) => {
+          dataset.data.push(storage);
+      });
+      chartAds.update();
       storage = null;
     }
 }

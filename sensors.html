@@ -125,7 +125,14 @@
             <canvas class="my-4 w-100 chartjs-render-monitor" id="chartUltrasonic" width="659" height="278" style="display: block; width: 659px; height: 278px;">
           </div>
 
-          <button class="btn btn-primary" id="ads">ADS 2</button>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <div class="btn-group-prepend">
+                <div class="input-group-text">Update ADS 2</div>
+              </div>
+              <label id="updateadsLabel" class="btn btn-primary">
+                <input type="checkbox" id="updateads" name="updateads" value="adson"> Enable
+              </label>
+          </div>
 
           <div>
             <canvas class="my-4 w-100 chartjs-render-monitor" id="chartAds" width="659" height="278" style="display: block; width: 659px; height: 278px;">
