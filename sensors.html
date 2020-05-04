@@ -118,6 +118,7 @@
                 <input type="checkbox" id="updateultrasonic" name="updateultrasonic"> Enable
               </label>
           </div>
+          
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
               <div class="btn-group-prepend">
                 <div class="input-group-text">Update IR Distance</div>
@@ -200,6 +201,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script>
       var storage = {};
+      var storage.sensor = {};
       var json;
       command("load");
 

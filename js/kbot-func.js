@@ -1,5 +1,6 @@
 var url = "https://th3ri5k.chickenkiller.com:8000/";
 var storage = {};
+storage.sensors = {};
 
 function getCookie(name) {
     var cookie = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -71,13 +72,18 @@ function query(type, name="", data="") {
     var token = getCookie("token");
     var username = getCookie("username");
 
-    data = "username=" + username + "&token=" + token + "&name=" + name + "&" + data;
+    if (name != "") {
+        name = "&name=" + name;
+    } 
+    
+    data = "username=" + username + "&token=" + token + name + "&" + data;
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             if(name == "") {
-              storage["type"] = JSON.parse(this.responseText);
+              console.log("Test: "+storage[type]);
+              storage[type] = JSON.parse(this.responseText);
             } else {
-              storage["type"][name] = JSON.parse(this.responseText);
+              storage[type][name] = JSON.parse(this.responseText);
             }
         } else if (this.readyState != 4 && this.status == 200) {
             xhttp = new XMLHttpRequest();

@@ -130,14 +130,6 @@ $(document).ready(function() {
             $("#camera").css("height", "576px");
         }
     });
-
-    $("#sweep").click(function (){
-        query("sweep");
-    });
-
-    $("#ads").click(function (){
-        query("ads");
-    });
 });
 
 $(document).keyup(function(key) {
@@ -276,7 +268,6 @@ function displayStorage() {
 
 function updateultrasonic() {
     query("sensor", "ULTRASWEEP");
-    //query("sensor", "name=LENCODER");
     if (storage["sensor"]["ULTRASWEEP"]) {
 
       distanceChart.data.labels.push(storage["sensor"]["ULTRASWEEP"]["x"]);
@@ -314,7 +305,6 @@ function updateencoders() {
 
 function updateir() {
     query("ir");
-
     if (storage["ir"]) {
       distanceChart.data.labels.push(storage["ir"]["x"]);
       distanceChart.data.datasets.forEach((dataset) => {
@@ -334,7 +324,7 @@ function updatepower() {
           dataset.data.push(storage["power"]);
       });
 
-      powerChart.update();
+      energyChart.update();
     }
 }
 
@@ -347,7 +337,7 @@ function updatebattery() {
           dataset.data.push(storage["battery"]);
       });
 
-      powerChart.update();
+      energyChart.update();
     }
 }
 
@@ -359,7 +349,7 @@ function updateSwitches(id) {
     $("#"+id).html("");
     $.each(storage, function(i, pin) {
         if(pin.type == "GPIO" && pin.mode == "OUT") {
-            $("#"+id).append('<button class="btn btn-light" onclick="query(\'switch\',\'name='+pin.name+'\');">'+pin.name+'</button><br>');
+            $("#"+id).append('<button class="btn btn-light" onclick="query(\'switch\','+pin.name+');">'+pin.name+'</button><br>');
         }
     });
 }
