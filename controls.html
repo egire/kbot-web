@@ -119,10 +119,14 @@
             <div id="cameracontrols" class="card">
                 <div class="card-header h6">Camera</div>
                 <div class="card-body">
-                  <div class="btn-group" role="group">
-                    <button class="btn btn-success" id="camerastart">Start</button>
-                    <button class="btn btn-danger" id="camerastop">Stop</button>
-                    <button class="btn btn-light" id="centercamera">Center</button>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <div class="btn-group-prepend">
+                        <div class="input-group-text">Camera Head</div>
+                      </div>
+                      <label class="btn btn-primary">
+                        <input type="checkbox" id="updatecam" value="updatecam"> Enable
+                      </label>
+                      <button class="btn btn-warning" id="centercamera">Center (E)</button>
                   </div>
                   <div>&nbsp;</div>
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -137,13 +141,13 @@
                   <div class="input-group">
                     <div class="input-group-prepend mb-2">
                       <span class="input-group-text">Yaw speed (Max)</span>
-                      <input class="form-control" type="number" size="3" name="panspeed" step="0.1" value="5.0" id="panspeed" placeholder="Pan Speed"><br>
+                      <input class="form-control" type="number" size="3" name="panspeed" step="1" value="25.0" id="panspeed" placeholder="Pan Speed"><br>
                     </div>
                   </div>
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">Tilt speed (Max)</span>
-                      <input class="form-control" type="number" size="3" name="tiltspeed" step="0.1" value="5.0" id="tiltspeed" placeholder="Tilt Speed">
+                      <input class="form-control" type="number" size="3" name="tiltspeed" step="1" value="25.0" id="tiltspeed" placeholder="Tilt Speed">
                     </div>
                   </div>
               </div>
@@ -213,7 +217,7 @@
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Max Speed</span>
-                    <input class="form-control" type="number" size="3" value="0.8" step="0.1" max="1.0" min="0.0" id="movespeed" placeholder="Pan Speed">
+                    <input class="form-control" type="number" size="3" value="1.0" step="0.1" max="1.0" min="0.0" id="movespeed" placeholder="Pan Speed">
                   </div>
                   <div class="input-group-append">
                     <button class="btn btn-danger" type="number" value="0" id="stop">Stop</button>

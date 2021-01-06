@@ -1,21 +1,10 @@
+var cam_state = true;
+
 $(document).ready(function() {
   setInterval(function() {
-      cam("cam");
-  }, 250);
-});
-
-$(document).ready(function(){
-  $("#camerastart").click(function(){
-      var xhttp = new XMLHttpRequest();
-      // xhttp.open("GET", cam_url + "cmd_pipe.php?cmd=ru 1", true);
-      // xhttp.send();
-  });
-
-  $("#camerastop").click(function(){
-      var xhttp = new XMLHttpRequest();
-      // xhttp.open("GET", cam_url + "cmd_pipe.php?cmd=ru 0", true);
-      // xhttp.send();
-  });
+      if($("#updatecam").prop("checked")){
+        cam("cam");}
+  }, 1000);
 });
 
 function cam(name="") {

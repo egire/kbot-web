@@ -95,20 +95,20 @@
           <!--
           <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
           -->
-          <div id="camera" class="card" style="width: 512px;">
-              <img id="kbotcam" style="position: absolute; width: inherit;" src="">
-              <div class="card-header" style="z-index: 100;">
-                <span class="badge badge-pill badge-warning" style="z-index: 10;">Camera Head</span>
-                <span id="maximize" style="width: 25px; height: auto; background-color: #ffc107; color: black; border: 1px solid black; position: absolute; right: 5px; top: 5px;" data-feather="maximize-2"></span>
-              </div>
-              <div class="card-body">
-                <div class="text-center">
-                  <div class="spinner-border text-warning" style="width: 3rem; height: 3rem; z-index: -10;" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
-                </div>
-              </div>
-          </div>
+          <!-- <div id="camera" class="card" style="width: 512px;"> -->
+              <!-- <img id="kbotcam" style="position: absolute; width: inherit;" src=""> -->
+              <!-- <div class="card-header" style="z-index: 100;"> -->
+                <!-- <span class="badge badge-pill badge-warning" style="z-index: 10;">Camera Head</span> -->
+                <!-- <span id="maximize" style="width: 25px; height: auto; background-color: #ffc107; color: black; border: 1px solid black; position: absolute; right: 5px; top: 5px;" data-feather="maximize-2"></span> -->
+              <!-- </div> -->
+              <!-- <div class="card-body"> -->
+                <!-- <div class="text-center"> -->
+                  <!-- <div class="spinner-border text-warning" style="width: 3rem; height: 3rem; z-index: -10;" role="status"> -->
+                    <!-- <span class="sr-only">Loading...</span> -->
+                  <!-- </div> -->
+                <!-- </div> -->
+              <!-- </div> -->
+          <!-- </div> -->
 
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
               <div class="btn-group-prepend">
@@ -201,7 +201,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script>
       var storage = {};
-      var storage.sensor = {};
+      storage.sensor = {};
       var json;
       command("load");
 

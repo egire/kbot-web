@@ -1,9 +1,10 @@
-var keyUp, keyDown, keyLeft, keyRight, keyW, keyA, keyS, keyD;
-var cam_pan = 98;
-var cam_tilt = 110;
-var movementSpeed = 0;
-var cam_tilt_speed = 0;
-var cam_pan_speed = 0;
+var keyUp, keyDown, keyLeft, keyRight, keyW, keyA, keyS, keyD, space;
+var cam_pan = 98.0;
+var cam_tilt = 110.0;
+var movement_speed = 0.0;
+var acceleration = 0.1;
+var cam_tilt_speed = 0.0;
+var cam_pan_speed = 0.0;
 var cam_viewport_x = $("#camera").css("right");
 var cam_viewport_y = $("#camera").css("bottom");
 
@@ -20,74 +21,80 @@ $(document).ready(function() {
 
     setInterval(function() {
         if($("#updateir").prop("checked")) {
-            updateir();
-        }
+            updateir();}
         if($("#updateultrasonic").prop("checked")) {
-            updateultrasonic();
-        }
+            updateultrasonic();}
         if($("#updatepower").prop("checked")) {
-            updatepower();
-        }
+            updatepower();}
         if($("#updatebattery").prop("checked")) {
-            updatebattery();
-        }
+            updatebattery();}
         if($("#updateencoders").prop("checked")) {
-            updateencoders();
-        }
-    }, 250);
+            updateencoders();}
+    }, 1000);
 
     setInterval(function() {
-        var leftFore = rightFore = leftAft = rightAft = 0;
+        var leftFore = rightFore = leftAft = rightAft = false;
+        
         var maxSpeed = parseFloat($("#movespeed").val());
 
         if(keyW) {
-            leftFore += 1;
-            leftAft += 1;
-            rightFore -= 1;
-            rightAft -= 1
+            leftFore += 1.0;
+            leftAft += 1.0;
+            rightFore -= 1.0;
+            rightAft -= 1.0;
         }
 
         if(keyA) {
-            leftFore += 1;
-            leftAft += 1;
-            rightFore += 1;
-            rightAft += 1;
+            leftFore += 1.0;
+            leftAft += 1.0;
+            rightFore += 1.0;
+            rightAft += 1.0;
         }
 
         if(keyS) {
-            leftFore -= 1;
-            leftAft -= 1;
-            rightFore += 1;
-            rightAft += 1;
+            leftFore -= 1.0;
+            leftAft -= 1.0;
+            rightFore += 1.0;
+            rightAft += 1.0;
         }
 
         if(keyD) {
-            leftFore -= 1;
-            leftAft -= 1;
-            rightFore -= 1;
-            rightAft -= 1;
+            leftFore -= 1.0;
+            leftAft -= 1.0;
+            rightFore -= 1.0;
+            rightAft -= 1.0;
         }
-
+        
+        if(space)
+        {
+            movement_speed = 0.0;
+        }
+        
         if(keyD || keyS || keyA || keyW) {
             leftFore = normalize(leftFore);
             leftAft = normalize(leftAft);
             rightFore = normalize(rightFore);
             rightAft = normalize(rightAft);
 
-            movementSpeed = clamp(movementSpeed += 0.1, 0.0, maxSpeed);
-
-            command("move", "leftFore="+leftFore*movementSpeed+"&leftAft="+leftAft*movementSpeed+"&rightFore="+rightFore*movementSpeed+"&rightAft="+rightAft*movementSpeed);
+            movement_speed = clamp(movement_speed += acceleration, 0.0, maxSpeed);
         } else {
-            movementSpeed = clamp(movementSpeed -= 0.5, 0.0, maxSpeed);
+            if(movement_speed >= 0.0)
+            {
+                movement_speed = clamp(movement_speed -= 0.1, 0.0, maxSpeed);
+            }
         }
-
-    }, 100);
+        
+        if(movement_speed >= 0.0)
+        {
+            command("move", "leftFore="+leftFore*movement_speed+"&leftAft="+leftAft*movement_speed+"&rightFore="+rightFore*movement_speed+"&rightAft="+rightAft*movement_speed);
+        }
+        
+    }, 250);
 
     setInterval(function() {
         var cam_tilt_speed_max = parseFloat($("#tiltspeed").val());
-        var cam_pan_speed_max = parseFloat($("#panspeed").val());
-        var cam_tilt_dir = 0;
-        var cam_pan_dir = 0;
+        
+        cam_tilt_dir = 0.0;
 
         if(keyUp) {
             cam_tilt_dir += 1;
@@ -97,6 +104,25 @@ $(document).ready(function() {
             cam_tilt_dir -= 1;
         }
 
+        if(keyUp || keyDown) {
+            cam_tilt_speed = clamp(cam_tilt_speed += 10.0, 0.0, cam_tilt_speed_max);
+            cam_tilt = clamp(cam_tilt_dir*cam_tilt_speed+cam_tilt, 60.0, 139.0);
+            command("rotate", "name=TILT&angle=" + cam_tilt);
+        } else {
+            if(cam_pan_speed > 0) {
+                cam_tilt = clamp(cam_tilt_dir*cam_tilt_speed+cam_tilt, 60.0, 139.0);
+                command("rotate", "name=TILT&angle=" + cam_tilt);
+            }
+            
+            cam_tilt_speed = clamp(cam_tilt_speed -= 25.0, 0.0, cam_tilt_speed_max);
+        }
+    }, 250);
+    
+    setInterval(function() {
+        var cam_pan_speed_max = parseFloat($("#panspeed").val());
+        
+        var cam_pan_dir = 0.0;
+
         if(keyLeft) {
             cam_pan_dir -= 1;
         }
@@ -104,20 +130,20 @@ $(document).ready(function() {
         if(keyRight) {
             cam_pan_dir += 1;
         }
-
-        if(keyUp || keyDown || keyLeft || keyRight) {
-            cam_pan_speed = clamp(cam_pan_speed += 0.1, 0.0, cam_pan_speed_max);
-            cam_tilt_speed = clamp(cam_tilt_speed += 0.1, 0.0, cam_tilt_speed_max);
-
-            cam_pan = clamp(cam_pan_dir*cam_pan_speed+cam_pan, 10.0, 180.0);
-            cam_tilt = clamp(cam_tilt_dir*cam_tilt_speed+cam_tilt, 10.0, 180.0);
+        
+        if(keyLeft || keyRight) {
+            cam_pan_speed = clamp(cam_pan_speed += 10.0, 0.0, cam_pan_speed_max);
+            cam_pan = clamp(cam_pan_dir*cam_pan_speed+cam_pan, 20.0, 180.0);
             command("rotate", "name=PAN&angle=" + cam_pan);
-            command("rotate", "name=TILT&angle=" + cam_tilt);
         } else {
-            cam_pan_speed = clamp(cam_pan_speed -= 0.5, 0.0, cam_pan_speed_max);
-            cam_tilt_speed = clamp(cam_tilt_speed -= 0.5, 0.0, cam_tilt_speed_max);
+            if(cam_pan_speed > 0) {
+                cam_pan = clamp(cam_pan_dir*cam_pan_speed+cam_pan, 20.0, 180.0);
+                command("rotate", "name=PAN&angle=" + cam_pan);
+            }
+            
+            cam_pan_speed = clamp(cam_pan_speed -= 25.0, 0.0, cam_pan_speed_max);
         }
-    }, 100);
+    }, 250);
 
     $("#camera").draggable();
 
@@ -181,20 +207,25 @@ $(document).keyup(function(key) {
         switch(key.which) {
             case 65: // left
                 keyA = false;
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
+                //command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 break;
             case 87: // up
                 keyW = false;
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
+                //command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 break;
             case 68: // right
                 keyD = false;
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
+                //command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 break;
             case 83: // down
                 keyS = false;
-                command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
+                //command("move", "leftFore="+0.0+"&leftAft="+0.0+"&rightFore="+0.0+"&rightAft="+0.0);
                 break;
+            case 32:
+                space = false;
+                break;
+            default:
+                return;
         }
         key.preventDefault();
     }
@@ -215,7 +246,11 @@ $(document).keydown(function(key) {
             case 83: // down
                 keyS = true;
                 break;
-            default: return;
+            case 32:
+                space = true;
+                break;
+            default:
+                return;
         }
         key.preventDefault();
     }
@@ -267,12 +302,11 @@ function displayStorage() {
 }
 
 function updateultrasonic() {
-    query("sensor", "ULTRASWEEP");
-    if (storage["sensor"]["ULTRASWEEP"]) {
-
-      distanceChart.data.labels.push(storage["sensor"]["ULTRASWEEP"]["x"]);
+    query("sensor", "ULTRASONIC");
+    if (storage["sensor"]["ULTRASONIC"]) {
+      distanceChart.data.labels.push(storage["sensor"]["ULTRASONIC"]["x"]);
       distanceChart.data.datasets.forEach((dataset) => {
-          dataset.data.push(storage["sensor"]["ULTRASWEEP"]);
+          dataset.data.push(storage["sensor"]["ULTRASONIC"]);
       });
       distanceChart.update();
     }

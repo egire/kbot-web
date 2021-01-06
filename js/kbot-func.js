@@ -1,4 +1,4 @@
-var url = "https://th3ri5k.chickenkiller.com:8000/";
+var url = "https://192.168.50.200:8000/";
 var storage = {};
 storage.sensors = {};
 
